@@ -1,0 +1,10 @@
+Establish Competition Framework v1 and World Cup prototypes
+
+Add reusable football competition framework with generic competition,
+stage, standings, advancement, tie, bracket, knockout, and resolver
+abstractions.
+
+Validate framework across invitational, domestic cup, league, World Cup
+group-stage, and World Cup knockout prototypes.
+
+Establish foundation for a complete framework-backed World Cup prototype.

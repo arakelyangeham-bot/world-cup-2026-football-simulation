@@ -1,0 +1,130 @@
+# ============================================================
+# Python generated files
+# ============================================================
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ============================================================
+# Virtual environments / local Python environments
+# ============================================================
+
+.venv/
+venv/
+env/
+ENV/
+
+# ============================================================
+# Editor / OS files
+# ============================================================
+
+.vscode/
+.idea/
+
+.DS_Store
+Thumbs.db
+
+# ============================================================
+# Generated pipeline outputs
+# ============================================================
+
+outputs/
+
+# ============================================================
+# Archives / local project snapshots
+# ============================================================
+
+*.zip
+
+# ============================================================
+# Root-level temporary inventory / inspection artifacts
+# ============================================================
+
+/architecture_*.txt
+/benchmark_candidate_files.txt
+/benchmark_content_candidates.txt
+/competition_data_coverage_inventory.txt
+/csv_export_scripts.txt
+/fm003_candidate_inventory.txt
+/football_model_artifact_inventory.txt
+/football_model_feature_inventory.txt
+/outputs_inventory.txt
+/project_structure.txt
+/study_*_inventory.txt
+/study_*_wiring.txt
+/version_*_inventory.txt
+
+# ============================================================
+# Miscellaneous root-level inspection artifacts
+# ============================================================
+
+/inspect_training_dataset.py
+/smoke_test_observatory_schema
+
+# ============================================================
+# Data policy
+# ============================================================
+#
+# Large scraped and generated datasets are not stored in Git.
+# Small model manifests, mappings, and reference/configuration
+# files are explicitly allowed below.
+
+# Generated production artifacts
+/data/processed/
+
+# Large / generated Sofascore datasets
+/data/raw/sofascore/*
+
+# Keep model/configuration manifests
+!/data/raw/sofascore/stat_manifest.csv
+!/data/raw/sofascore/competition_manifest.csv
+!/data/raw/sofascore/competition_feature_manifest.csv
+!/data/raw/sofascore/confidence_manifest.csv
+!/data/raw/sofascore/feature_attribute_manifest.csv
+!/data/raw/sofascore/role_attribute_manifest.csv
+!/data/raw/sofascore/role_feature_manifest.csv
+!/data/raw/sofascore/formation_manifest.csv
+
+# Reviewed canonical identity mapping
+!/data/raw/sofascore/sofascore_player_id_aliases.csv
+
+# Reference data
+!/data/reference/
+!/data/reference/**
+
+# Small research configuration
+!/data/research/
+!/data/research/**
+
+# Roster/reference inputs
+!/data/roster/
+!/data/roster/**
+
+# Small team-repository fixtures/reference artifacts
+!/data/team_repositories/
+!/data/team_repositories/**
+
+# External source material is local by default
+/data/external/
+
+# Miscellaneous scraped World Cup player-stat exports
+/data/sofascore_wc_player_stats.csv
+/data/sofascore_wc_player_stats_failed.csv
+/expected_lineups_sample.csv
+/player_profile.json
+/study_101_model_feature_provenance.txt
+
+# ============================================================
+# Generated / downloaded research datasets
+# ============================================================
+
+/research/data/raw/
+/research/data/processed/
+
+# Generated interactive reports
+/reports/interactive/

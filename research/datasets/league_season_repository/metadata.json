@@ -1,0 +1,50 @@
+{
+  "study_id": "study_042",
+  "dataset_name": "league_season_repository",
+  "description": "Canonical research dataset containing one league-level fingerprint observation per competition-season.",
+  "created_utc": "2026-07-23T08:21:44+00:00",
+  "repository_path": "C:\\Users\\arake\\.vscode\\Python Stuff\\.vscode\\World Cup 2026 Data Science Project\\research\\datasets\\league_season_repository\\league_season_repository.csv",
+  "row_count": 25,
+  "competition_count": 5,
+  "season_count": 5,
+  "competition_keys": [
+    "bundesliga",
+    "la_liga",
+    "ligue_1",
+    "premier_league",
+    "serie_a"
+  ],
+  "season_start_years": [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "rows_by_season": {
+    "2021": 5,
+    "2022": 5,
+    "2023": 5,
+    "2024": 5,
+    "2025": 5
+  },
+  "rows_by_competition": {
+    "bundesliga": 5,
+    "la_liga": 5,
+    "ligue_1": 5,
+    "premier_league": 5,
+    "serie_a": 5
+  },
+  "source_files": [
+    "C:\\Users\\arake\\.vscode\\Python Stuff\\.vscode\\World Cup 2026 Data Science Project\\research\\studies\\study_042_cross_league_opta_prior_calibration\\outputs\\league_fingerprints_2021.csv",
+    "C:\\Users\\arake\\.vscode\\Python Stuff\\.vscode\\World Cup 2026 Data Science Project\\research\\studies\\study_042_cross_league_opta_prior_calibration\\outputs\\league_fingerprints_2022.csv",
+    "C:\\Users\\arake\\.vscode\\Python Stuff\\.vscode\\World Cup 2026 Data Science Project\\research\\studies\\study_042_cross_league_opta_prior_calibration\\outputs\\league_fingerprints_2023.csv",
+    "C:\\Users\\arake\\.vscode\\Python Stuff\\.vscode\\World Cup 2026 Data Science Project\\research\\studies\\study_042_cross_league_opta_prior_calibration\\outputs\\league_fingerprints_2024.csv",
+    "C:\\Users\\arake\\.vscode\\Python Stuff\\.vscode\\World Cup 2026 Data Science Project\\research\\studies\\study_042_cross_league_opta_prior_calibration\\outputs\\league_fingerprints_2025.csv"
+  ],
+  "primary_key": [
+    "competition_key",
+    "season_start_year"
+  ],
+  "validation_status": "passed"
+}

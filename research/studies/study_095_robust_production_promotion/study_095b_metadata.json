@@ -1,0 +1,18 @@
+{
+  "study_id": "095B",
+  "study_name": "Canonical Robust Player Representation Promotion",
+  "status": "PASS",
+  "default_feature_transformation": "robust_zscore",
+  "canonical_player_attributes_regenerated": true,
+  "canonical_player_ratings_regenerated": true,
+  "canonical_attributes_match_validated_candidate": true,
+  "canonical_ratings_match_validated_candidate": true,
+  "player_population_preserved": true,
+  "attribute_schema_preserved": true,
+  "rating_schema_preserved": true,
+  "missing_value_patterns_preserved": true,
+  "player_intelligence_tests_passed": true,
+  "downstream_repositories_regenerated": false,
+  "production_goal_model_regenerated": false,
+  "world_cup_runtime_changed": false
+}

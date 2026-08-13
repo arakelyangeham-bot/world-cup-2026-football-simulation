@@ -1,0 +1,3 @@
+parameter,value
+full_confidence_minutes,1800
+low_sample_threshold,0.30

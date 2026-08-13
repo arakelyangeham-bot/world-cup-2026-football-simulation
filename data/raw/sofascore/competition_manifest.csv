@@ -1,0 +1,52 @@
+competition,competition_type,competition_id,season_id,season_year,priority,importance,recency_weight,competition_importance,enabled,scrape_teams,scrape_players,scrape_stats
+FIFA World Cup,world_cup,16,58210,2026,200,1.0,1.0,1.5,True,True,True,True
+AFC Asian Cup,continental_international,246,51384,2023,100,1.0,0.65,1.3,True,True,True,True
+AFC Asian Cup Qualifiers,international_qualifier,28,60998,2026,100,1.0,1.0,1.1,True,True,True,True
+AFCON Qualifiers,international_qualifier,1848,41862,2023,100,1.0,0.65,1.1,True,True,True,True
+AFCON Qualifiers,international_qualifier,1848,58857,2024,100,1.0,0.75,1.1,True,True,True,True
+AFCON Qualifiers,international_qualifier,1848,90940,2026,100,1.0,1.0,1.1,True,True,True,True
+Africa Cup of Nations,continental_international,270,56021,2023,100,1.0,0.65,1.3,True,True,True,True
+Africa Cup of Nations,continental_international,270,71636,25/26,100,1.0,1.0,1.3,True,True,True,True
+Bundesliga,club_league,35,37166,21/22,100,1.0,0.5,1.0,True,True,True,True
+Bundesliga,club_league,35,42268,22/23,100,1.0,0.5,1.0,True,True,True,True
+Bundesliga,club_league,35,52608,23/24,100,1.0,0.5,1.0,True,True,True,True
+Bundesliga,club_league,35,63516,24/25,100,1.0,0.75,1.0,True,True,True,True
+Bundesliga,club_league,35,77333,25/26,100,1.0,1.0,1.0,True,True,True,True
+CAF World Cup Qualifiers,international_qualifier,13,56249,2025,100,1.0,0.9,1.1,True,True,True,True
+CONCACAF Gold Cup,continental_international,140,50492,2023,100,1.0,0.65,1.3,True,True,True,True
+CONCACAF Gold Cup,continental_international,140,72840,2025,100,1.0,0.9,1.3,True,True,True,True
+CONCACAF Nations League,continental_international,14100,53046,23/24,100,1.0,0.5,1.3,True,True,True,True
+CONCACAF Nations League,continental_international,14100,61662,24/25,100,1.0,0.75,1.3,True,True,True,True
+CONCACAF World Cup Qualifiers,international_qualifier,14,58146,2025,100,1.0,0.9,1.1,True,True,True,True
+CONMEBOL World Cup Qualifiers,international_qualifier,295,53820,2026,100,1.0,1.0,1.1,True,True,True,True
+Copa América,continental_international,133,57114,2024,100,1.0,0.75,1.3,True,True,True,True
+International Friendly Games,international,851,47776,2023,100,1.0,0.65,1.15,True,True,True,True
+International Friendly Games,international,851,57198,2024,100,1.0,0.75,1.15,True,True,True,True
+International Friendly Games,international,851,69578,2025,100,1.0,0.9,1.15,True,True,True,True
+International Friendly Games,international,851,87155,2026,100,1.0,1.0,1.15,True,True,True,True
+La Liga,club_league,8,37223,21/22,100,1.0,0.5,1.0,True,True,True,True
+La Liga,club_league,8,42409,22/23,100,1.0,0.5,1.0,True,True,True,True
+La Liga,club_league,8,52376,23/24,100,1.0,0.5,1.0,True,True,True,True
+La Liga,club_league,8,61643,24/25,100,1.0,0.75,1.0,True,True,True,True
+La Liga,club_league,8,77559,25/26,100,1.0,1.0,1.0,True,True,True,True
+Ligue 1,club_league,34,37167,21/22,100,1.0,0.5,1.0,True,True,True,True
+Ligue 1,club_league,34,42273,22/23,100,1.0,0.5,1.0,True,True,True,True
+Ligue 1,club_league,34,52571,23/24,100,1.0,0.5,1.0,True,True,True,True
+Ligue 1,club_league,34,61736,24/25,100,1.0,0.75,1.0,True,True,True,True
+Ligue 1,club_league,34,77356,25/26,100,1.0,1.0,1.0,True,True,True,True
+OFC Men's Nations Cup,international,22716,61582,2024,100,1.0,0.75,1.15,True,True,True,True
+OFC World Cup Qualifiers,international_qualifier,309,64335,2024,100,1.0,0.75,1.1,True,True,True,True
+Premier League,club_league,17,37036,21/22,100,1.0,0.5,1.0,True,True,True,True
+Premier League,club_league,17,41886,22/23,100,1.0,0.5,1.0,True,True,True,True
+Premier League,club_league,17,52186,23/24,100,1.0,0.5,1.0,True,True,True,True
+Premier League,club_league,17,61627,24/25,100,1.0,0.75,1.0,True,True,True,True
+Premier League,club_league,17,76986,25/26,100,1.0,1.0,1.0,True,True,True,True
+Serie A,club_league,23,37475,21/22,100,1.0,0.5,1.0,True,True,True,True
+Serie A,club_league,23,42415,22/23,100,1.0,0.5,1.0,True,True,True,True
+Serie A,club_league,23,52760,23/24,100,1.0,0.5,1.0,True,True,True,True
+Serie A,club_league,23,63515,24/25,100,1.0,0.75,1.0,True,True,True,True
+Serie A,club_league,23,76457,25/26,100,1.0,1.0,1.0,True,True,True,True
+UEFA Euro Qualifiers,international_qualifier,27,46599,2024,100,1.0,0.75,1.1,True,True,True,True
+UEFA European Championship,continental_international,1,56953,2024,100,1.0,0.75,1.3,True,True,True,True
+UEFA Nations League,international,10783,58337,24/25,100,1.0,0.75,1.15,True,True,True,True
+UEFA World Cup Qualifiers,international_qualifier,11,69427,2026,100,1.0,1.0,1.1,True,True,True,True

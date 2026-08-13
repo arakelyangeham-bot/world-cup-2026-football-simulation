@@ -1,0 +1,14 @@
+{
+  "prior_weight": 2.0,
+  "home_adv_cap": 1.15,
+  "rho": -0.13,
+  "tournament_avg_xg": 1.294,
+  "_meta": {
+    "last_updated": null,
+    "optimized_for_metric": null,
+    "metric_value": null,
+    "n_matches_used": null,
+    "fold_weights": null,
+    "updated_by": "default"
+  }
+}

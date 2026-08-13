@@ -1,0 +1,353 @@
+competition,season_year,feature,coverage,available
+CAF World Cup Qualifiers,2025,minutesPlayed,0.9919773478055688,True
+CAF World Cup Qualifiers,2025,rating,0.0,False
+CAF World Cup Qualifiers,2025,goals,0.9943369513921662,True
+CAF World Cup Qualifiers,2025,assists,0.9943369513921662,True
+CAF World Cup Qualifiers,2025,keyPasses,0.0,False
+CAF World Cup Qualifiers,2025,tackles,0.0,False
+CAF World Cup Qualifiers,2025,interceptions,0.0,False
+CAF World Cup Qualifiers,2025,clearances,0.0,False
+CAF World Cup Qualifiers,2025,saves,0.0,False
+CAF World Cup Qualifiers,2025,cleanSheet,0.0674846625766871,False
+CAF World Cup Qualifiers,2025,expectedGoals,0.0,False
+CAF World Cup Qualifiers,2025,expectedAssists,0.0,False
+CAF World Cup Qualifiers,2025,shotsOnTarget,0.0,False
+CAF World Cup Qualifiers,2025,accurateCrosses,0.0,False
+CAF World Cup Qualifiers,2025,successfulDribbles,0.0,False
+CAF World Cup Qualifiers,2025,ballRecovery,0.0,False
+CONCACAF World Cup Qualifiers,2025,minutesPlayed,1.0,True
+CONCACAF World Cup Qualifiers,2025,rating,0.0,False
+CONCACAF World Cup Qualifiers,2025,goals,1.0,True
+CONCACAF World Cup Qualifiers,2025,assists,1.0,True
+CONCACAF World Cup Qualifiers,2025,keyPasses,0.0,False
+CONCACAF World Cup Qualifiers,2025,tackles,0.0,False
+CONCACAF World Cup Qualifiers,2025,interceptions,0.0,False
+CONCACAF World Cup Qualifiers,2025,clearances,0.0,False
+CONCACAF World Cup Qualifiers,2025,saves,0.0,False
+CONCACAF World Cup Qualifiers,2025,cleanSheet,0.0619747899159663,False
+CONCACAF World Cup Qualifiers,2025,expectedGoals,0.0,False
+CONCACAF World Cup Qualifiers,2025,expectedAssists,0.0,False
+CONCACAF World Cup Qualifiers,2025,shotsOnTarget,0.0,False
+CONCACAF World Cup Qualifiers,2025,accurateCrosses,0.0,False
+CONCACAF World Cup Qualifiers,2025,successfulDribbles,0.0,False
+CONCACAF World Cup Qualifiers,2025,ballRecovery,0.0,False
+OFC Men's Nations Cup,2024,minutesPlayed,1.0,True
+OFC Men's Nations Cup,2024,rating,0.0,False
+OFC Men's Nations Cup,2024,goals,1.0,True
+OFC Men's Nations Cup,2024,assists,0.0,False
+OFC Men's Nations Cup,2024,keyPasses,0.0,False
+OFC Men's Nations Cup,2024,tackles,0.0,False
+OFC Men's Nations Cup,2024,interceptions,0.0,False
+OFC Men's Nations Cup,2024,clearances,0.0,False
+OFC Men's Nations Cup,2024,saves,0.0,False
+OFC Men's Nations Cup,2024,cleanSheet,0.0921985815602836,False
+OFC Men's Nations Cup,2024,expectedGoals,0.0,False
+OFC Men's Nations Cup,2024,expectedAssists,0.0,False
+OFC Men's Nations Cup,2024,shotsOnTarget,0.0,False
+OFC Men's Nations Cup,2024,accurateCrosses,0.0,False
+OFC Men's Nations Cup,2024,successfulDribbles,0.0,False
+OFC Men's Nations Cup,2024,ballRecovery,0.0,False
+AFC Asian Cup Qualifiers,2026,minutesPlayed,1.0,True
+AFC Asian Cup Qualifiers,2026,rating,0.972568578553616,True
+AFC Asian Cup Qualifiers,2026,goals,1.0,True
+AFC Asian Cup Qualifiers,2026,assists,1.0,True
+AFC Asian Cup Qualifiers,2026,keyPasses,1.0,True
+AFC Asian Cup Qualifiers,2026,tackles,0.0,False
+AFC Asian Cup Qualifiers,2026,interceptions,0.0,False
+AFC Asian Cup Qualifiers,2026,clearances,1.0,True
+AFC Asian Cup Qualifiers,2026,saves,1.0,True
+AFC Asian Cup Qualifiers,2026,cleanSheet,1.0,True
+AFC Asian Cup Qualifiers,2026,expectedGoals,0.0,False
+AFC Asian Cup Qualifiers,2026,expectedAssists,0.0,False
+AFC Asian Cup Qualifiers,2026,shotsOnTarget,1.0,True
+AFC Asian Cup Qualifiers,2026,accurateCrosses,1.0,True
+AFC Asian Cup Qualifiers,2026,successfulDribbles,1.0,True
+AFC Asian Cup Qualifiers,2026,ballRecovery,1.0,True
+UEFA Euro Qualifiers,2024,minutesPlayed,1.0,True
+UEFA Euro Qualifiers,2024,rating,1.0,True
+UEFA Euro Qualifiers,2024,goals,1.0,True
+UEFA Euro Qualifiers,2024,assists,1.0,True
+UEFA Euro Qualifiers,2024,keyPasses,1.0,True
+UEFA Euro Qualifiers,2024,tackles,1.0,True
+UEFA Euro Qualifiers,2024,interceptions,1.0,True
+UEFA Euro Qualifiers,2024,clearances,1.0,True
+UEFA Euro Qualifiers,2024,saves,1.0,True
+UEFA Euro Qualifiers,2024,cleanSheet,1.0,True
+UEFA Euro Qualifiers,2024,expectedGoals,0.0,False
+UEFA Euro Qualifiers,2024,expectedAssists,0.0,False
+UEFA Euro Qualifiers,2024,shotsOnTarget,1.0,True
+UEFA Euro Qualifiers,2024,accurateCrosses,1.0,True
+UEFA Euro Qualifiers,2024,successfulDribbles,1.0,True
+UEFA Euro Qualifiers,2024,ballRecovery,1.0,True
+UEFA World Cup Qualifiers,2026,minutesPlayed,1.0,True
+UEFA World Cup Qualifiers,2026,rating,1.0,True
+UEFA World Cup Qualifiers,2026,goals,1.0,True
+UEFA World Cup Qualifiers,2026,assists,1.0,True
+UEFA World Cup Qualifiers,2026,keyPasses,1.0,True
+UEFA World Cup Qualifiers,2026,tackles,1.0,True
+UEFA World Cup Qualifiers,2026,interceptions,1.0,True
+UEFA World Cup Qualifiers,2026,clearances,1.0,True
+UEFA World Cup Qualifiers,2026,saves,1.0,True
+UEFA World Cup Qualifiers,2026,cleanSheet,1.0,True
+UEFA World Cup Qualifiers,2026,expectedGoals,0.0,False
+UEFA World Cup Qualifiers,2026,expectedAssists,0.0,False
+UEFA World Cup Qualifiers,2026,shotsOnTarget,1.0,True
+UEFA World Cup Qualifiers,2026,accurateCrosses,1.0,True
+UEFA World Cup Qualifiers,2026,successfulDribbles,1.0,True
+UEFA World Cup Qualifiers,2026,ballRecovery,1.0,True
+UEFA Nations League,24/25,minutesPlayed,1.0,True
+UEFA Nations League,24/25,rating,1.0,True
+UEFA Nations League,24/25,goals,1.0,True
+UEFA Nations League,24/25,assists,1.0,True
+UEFA Nations League,24/25,keyPasses,1.0,True
+UEFA Nations League,24/25,tackles,1.0,True
+UEFA Nations League,24/25,interceptions,1.0,True
+UEFA Nations League,24/25,clearances,1.0,True
+UEFA Nations League,24/25,saves,1.0,True
+UEFA Nations League,24/25,cleanSheet,1.0,True
+UEFA Nations League,24/25,expectedGoals,0.0,False
+UEFA Nations League,24/25,expectedAssists,0.0,False
+UEFA Nations League,24/25,shotsOnTarget,1.0,True
+UEFA Nations League,24/25,accurateCrosses,1.0,True
+UEFA Nations League,24/25,successfulDribbles,1.0,True
+UEFA Nations League,24/25,ballRecovery,1.0,True
+AFCON Qualifiers,2023,minutesPlayed,1.0,True
+AFCON Qualifiers,2023,rating,1.0,True
+AFCON Qualifiers,2023,goals,1.0,True
+AFCON Qualifiers,2023,assists,0.1119109947643979,False
+AFCON Qualifiers,2023,keyPasses,1.0,True
+AFCON Qualifiers,2023,tackles,1.0,True
+AFCON Qualifiers,2023,interceptions,1.0,True
+AFCON Qualifiers,2023,clearances,1.0,True
+AFCON Qualifiers,2023,saves,1.0,True
+AFCON Qualifiers,2023,cleanSheet,1.0,True
+AFCON Qualifiers,2023,expectedGoals,0.0,False
+AFCON Qualifiers,2023,expectedAssists,0.0,False
+AFCON Qualifiers,2023,shotsOnTarget,1.0,True
+AFCON Qualifiers,2023,accurateCrosses,1.0,True
+AFCON Qualifiers,2023,successfulDribbles,1.0,True
+AFCON Qualifiers,2023,ballRecovery,0.99934554973822,True
+AFCON Qualifiers,2024,minutesPlayed,1.0,True
+AFCON Qualifiers,2024,rating,1.0,True
+AFCON Qualifiers,2024,goals,1.0,True
+AFCON Qualifiers,2024,assists,1.0,True
+AFCON Qualifiers,2024,keyPasses,1.0,True
+AFCON Qualifiers,2024,tackles,1.0,True
+AFCON Qualifiers,2024,interceptions,1.0,True
+AFCON Qualifiers,2024,clearances,1.0,True
+AFCON Qualifiers,2024,saves,1.0,True
+AFCON Qualifiers,2024,cleanSheet,1.0,True
+AFCON Qualifiers,2024,expectedGoals,0.0,False
+AFCON Qualifiers,2024,expectedAssists,0.0,False
+AFCON Qualifiers,2024,shotsOnTarget,1.0,True
+AFCON Qualifiers,2024,accurateCrosses,1.0,True
+AFCON Qualifiers,2024,successfulDribbles,1.0,True
+AFCON Qualifiers,2024,ballRecovery,1.0,True
+CONCACAF Nations League,24/25,minutesPlayed,1.0,True
+CONCACAF Nations League,24/25,rating,1.0,True
+CONCACAF Nations League,24/25,goals,1.0,True
+CONCACAF Nations League,24/25,assists,1.0,True
+CONCACAF Nations League,24/25,keyPasses,1.0,True
+CONCACAF Nations League,24/25,tackles,1.0,True
+CONCACAF Nations League,24/25,interceptions,1.0,True
+CONCACAF Nations League,24/25,clearances,1.0,True
+CONCACAF Nations League,24/25,saves,1.0,True
+CONCACAF Nations League,24/25,cleanSheet,1.0,True
+CONCACAF Nations League,24/25,expectedGoals,0.0,False
+CONCACAF Nations League,24/25,expectedAssists,0.0,False
+CONCACAF Nations League,24/25,shotsOnTarget,1.0,True
+CONCACAF Nations League,24/25,accurateCrosses,1.0,True
+CONCACAF Nations League,24/25,successfulDribbles,1.0,True
+CONCACAF Nations League,24/25,ballRecovery,1.0,True
+FIFA World Cup,2026,minutesPlayed,1.0,True
+FIFA World Cup,2026,rating,1.0,True
+FIFA World Cup,2026,goals,1.0,True
+FIFA World Cup,2026,assists,1.0,True
+FIFA World Cup,2026,keyPasses,1.0,True
+FIFA World Cup,2026,tackles,1.0,True
+FIFA World Cup,2026,interceptions,1.0,True
+FIFA World Cup,2026,clearances,1.0,True
+FIFA World Cup,2026,saves,1.0,True
+FIFA World Cup,2026,cleanSheet,1.0,True
+FIFA World Cup,2026,expectedGoals,0.6589147286821705,True
+FIFA World Cup,2026,expectedAssists,0.9806201550387597,True
+FIFA World Cup,2026,shotsOnTarget,1.0,True
+FIFA World Cup,2026,accurateCrosses,1.0,True
+FIFA World Cup,2026,successfulDribbles,1.0,True
+FIFA World Cup,2026,ballRecovery,1.0,True
+Premier League,23/24,minutesPlayed,1.0,True
+Premier League,23/24,rating,1.0,True
+Premier League,23/24,goals,1.0,True
+Premier League,23/24,assists,1.0,True
+Premier League,23/24,keyPasses,1.0,True
+Premier League,23/24,tackles,1.0,True
+Premier League,23/24,interceptions,1.0,True
+Premier League,23/24,clearances,1.0,True
+Premier League,23/24,saves,1.0,True
+Premier League,23/24,cleanSheet,1.0,True
+Premier League,23/24,expectedGoals,0.8807017543859649,True
+Premier League,23/24,expectedAssists,0.9859649122807016,True
+Premier League,23/24,shotsOnTarget,1.0,True
+Premier League,23/24,accurateCrosses,1.0,True
+Premier League,23/24,successfulDribbles,1.0,True
+Premier League,23/24,ballRecovery,1.0,True
+Premier League,24/25,minutesPlayed,1.0,True
+Premier League,24/25,rating,1.0,True
+Premier League,24/25,goals,1.0,True
+Premier League,24/25,assists,1.0,True
+Premier League,24/25,keyPasses,1.0,True
+Premier League,24/25,tackles,1.0,True
+Premier League,24/25,interceptions,1.0,True
+Premier League,24/25,clearances,1.0,True
+Premier League,24/25,saves,1.0,True
+Premier League,24/25,cleanSheet,1.0,True
+Premier League,24/25,expectedGoals,0.8131672597864769,True
+Premier League,24/25,expectedAssists,0.9839857651245552,True
+Premier League,24/25,shotsOnTarget,1.0,True
+Premier League,24/25,accurateCrosses,1.0,True
+Premier League,24/25,successfulDribbles,1.0,True
+Premier League,24/25,ballRecovery,1.0,True
+Africa Cup of Nations,25/26,minutesPlayed,1.0,True
+Africa Cup of Nations,25/26,rating,1.0,True
+Africa Cup of Nations,25/26,goals,1.0,True
+Africa Cup of Nations,25/26,assists,1.0,True
+Africa Cup of Nations,25/26,keyPasses,1.0,True
+Africa Cup of Nations,25/26,tackles,1.0,True
+Africa Cup of Nations,25/26,interceptions,1.0,True
+Africa Cup of Nations,25/26,clearances,1.0,True
+Africa Cup of Nations,25/26,saves,1.0,True
+Africa Cup of Nations,25/26,cleanSheet,1.0,True
+Africa Cup of Nations,25/26,expectedGoals,0.0,False
+Africa Cup of Nations,25/26,expectedAssists,0.0,False
+Africa Cup of Nations,25/26,shotsOnTarget,1.0,True
+Africa Cup of Nations,25/26,accurateCrosses,1.0,True
+Africa Cup of Nations,25/26,successfulDribbles,1.0,True
+Africa Cup of Nations,25/26,ballRecovery,1.0,True
+Premier League,25/26,minutesPlayed,1.0,True
+Premier League,25/26,rating,1.0,True
+Premier League,25/26,goals,1.0,True
+Premier League,25/26,assists,1.0,True
+Premier League,25/26,keyPasses,1.0,True
+Premier League,25/26,tackles,1.0,True
+Premier League,25/26,interceptions,1.0,True
+Premier League,25/26,clearances,1.0,True
+Premier League,25/26,saves,1.0,True
+Premier League,25/26,cleanSheet,1.0,True
+Premier League,25/26,expectedGoals,0.8268156424581006,True
+Premier League,25/26,expectedAssists,0.9851024208566108,True
+Premier League,25/26,shotsOnTarget,1.0,True
+Premier League,25/26,accurateCrosses,1.0,True
+Premier League,25/26,successfulDribbles,1.0,True
+Premier League,25/26,ballRecovery,1.0,True
+Africa Cup of Nations,2023,minutesPlayed,1.0,True
+Africa Cup of Nations,2023,rating,1.0,True
+Africa Cup of Nations,2023,goals,1.0,True
+Africa Cup of Nations,2023,assists,1.0,True
+Africa Cup of Nations,2023,keyPasses,1.0,True
+Africa Cup of Nations,2023,tackles,1.0,True
+Africa Cup of Nations,2023,interceptions,1.0,True
+Africa Cup of Nations,2023,clearances,1.0,True
+Africa Cup of Nations,2023,saves,1.0,True
+Africa Cup of Nations,2023,cleanSheet,1.0,True
+Africa Cup of Nations,2023,expectedGoals,0.0,False
+Africa Cup of Nations,2023,expectedAssists,0.0,False
+Africa Cup of Nations,2023,shotsOnTarget,1.0,True
+Africa Cup of Nations,2023,accurateCrosses,1.0,True
+Africa Cup of Nations,2023,successfulDribbles,1.0,True
+Africa Cup of Nations,2023,ballRecovery,1.0,True
+AFC Asian Cup,2023,minutesPlayed,1.0,True
+AFC Asian Cup,2023,rating,1.0,True
+AFC Asian Cup,2023,goals,1.0,True
+AFC Asian Cup,2023,assists,1.0,True
+AFC Asian Cup,2023,keyPasses,1.0,True
+AFC Asian Cup,2023,tackles,1.0,True
+AFC Asian Cup,2023,interceptions,1.0,True
+AFC Asian Cup,2023,clearances,1.0,True
+AFC Asian Cup,2023,saves,1.0,True
+AFC Asian Cup,2023,cleanSheet,1.0,True
+AFC Asian Cup,2023,expectedGoals,0.0,False
+AFC Asian Cup,2023,expectedAssists,0.0,False
+AFC Asian Cup,2023,shotsOnTarget,1.0,True
+AFC Asian Cup,2023,accurateCrosses,1.0,True
+AFC Asian Cup,2023,successfulDribbles,1.0,True
+AFC Asian Cup,2023,ballRecovery,1.0,True
+UEFA European Championship,2024,minutesPlayed,1.0,True
+UEFA European Championship,2024,rating,1.0,True
+UEFA European Championship,2024,goals,1.0,True
+UEFA European Championship,2024,assists,1.0,True
+UEFA European Championship,2024,keyPasses,1.0,True
+UEFA European Championship,2024,tackles,1.0,True
+UEFA European Championship,2024,interceptions,1.0,True
+UEFA European Championship,2024,clearances,1.0,True
+UEFA European Championship,2024,saves,1.0,True
+UEFA European Championship,2024,cleanSheet,1.0,True
+UEFA European Championship,2024,expectedGoals,0.6795131845841785,True
+UEFA European Championship,2024,expectedAssists,0.9797160243407708,True
+UEFA European Championship,2024,shotsOnTarget,1.0,True
+UEFA European Championship,2024,accurateCrosses,1.0,True
+UEFA European Championship,2024,successfulDribbles,1.0,True
+UEFA European Championship,2024,ballRecovery,1.0,True
+CONMEBOL World Cup Qualifiers,2026,minutesPlayed,1.0,True
+CONMEBOL World Cup Qualifiers,2026,rating,1.0,True
+CONMEBOL World Cup Qualifiers,2026,goals,1.0,True
+CONMEBOL World Cup Qualifiers,2026,assists,1.0,True
+CONMEBOL World Cup Qualifiers,2026,keyPasses,1.0,True
+CONMEBOL World Cup Qualifiers,2026,tackles,1.0,True
+CONMEBOL World Cup Qualifiers,2026,interceptions,1.0,True
+CONMEBOL World Cup Qualifiers,2026,clearances,1.0,True
+CONMEBOL World Cup Qualifiers,2026,saves,1.0,True
+CONMEBOL World Cup Qualifiers,2026,cleanSheet,1.0,True
+CONMEBOL World Cup Qualifiers,2026,expectedGoals,0.0021645021645021,False
+CONMEBOL World Cup Qualifiers,2026,expectedAssists,0.0021645021645021,False
+CONMEBOL World Cup Qualifiers,2026,shotsOnTarget,1.0,True
+CONMEBOL World Cup Qualifiers,2026,accurateCrosses,1.0,True
+CONMEBOL World Cup Qualifiers,2026,successfulDribbles,1.0,True
+CONMEBOL World Cup Qualifiers,2026,ballRecovery,1.0,True
+Copa América,2024,minutesPlayed,1.0,True
+Copa América,2024,rating,1.0,True
+Copa América,2024,goals,1.0,True
+Copa América,2024,assists,1.0,True
+Copa América,2024,keyPasses,1.0,True
+Copa América,2024,tackles,1.0,True
+Copa América,2024,interceptions,1.0,True
+Copa América,2024,clearances,1.0,True
+Copa América,2024,saves,1.0,True
+Copa América,2024,cleanSheet,1.0,True
+Copa América,2024,expectedGoals,0.6253687315634219,True
+Copa América,2024,expectedAssists,0.9852507374631267,True
+Copa América,2024,shotsOnTarget,1.0,True
+Copa América,2024,accurateCrosses,1.0,True
+Copa América,2024,successfulDribbles,1.0,True
+Copa América,2024,ballRecovery,1.0,True
+CONCACAF Gold Cup,2025,minutesPlayed,1.0,True
+CONCACAF Gold Cup,2025,rating,1.0,True
+CONCACAF Gold Cup,2025,goals,1.0,True
+CONCACAF Gold Cup,2025,assists,1.0,True
+CONCACAF Gold Cup,2025,keyPasses,1.0,True
+CONCACAF Gold Cup,2025,tackles,1.0,True
+CONCACAF Gold Cup,2025,interceptions,1.0,True
+CONCACAF Gold Cup,2025,clearances,1.0,True
+CONCACAF Gold Cup,2025,saves,1.0,True
+CONCACAF Gold Cup,2025,cleanSheet,1.0,True
+CONCACAF Gold Cup,2025,expectedGoals,0.0,False
+CONCACAF Gold Cup,2025,expectedAssists,0.0,False
+CONCACAF Gold Cup,2025,shotsOnTarget,1.0,True
+CONCACAF Gold Cup,2025,accurateCrosses,1.0,True
+CONCACAF Gold Cup,2025,successfulDribbles,1.0,True
+CONCACAF Gold Cup,2025,ballRecovery,1.0,True
+CONCACAF Gold Cup,2023,minutesPlayed,1.0,True
+CONCACAF Gold Cup,2023,rating,1.0,True
+CONCACAF Gold Cup,2023,goals,1.0,True
+CONCACAF Gold Cup,2023,assists,1.0,True
+CONCACAF Gold Cup,2023,keyPasses,1.0,True
+CONCACAF Gold Cup,2023,tackles,1.0,True
+CONCACAF Gold Cup,2023,interceptions,1.0,True
+CONCACAF Gold Cup,2023,clearances,1.0,True
+CONCACAF Gold Cup,2023,saves,1.0,True
+CONCACAF Gold Cup,2023,cleanSheet,1.0,True
+CONCACAF Gold Cup,2023,expectedGoals,0.0,False
+CONCACAF Gold Cup,2023,expectedAssists,0.0,False
+CONCACAF Gold Cup,2023,shotsOnTarget,1.0,True
+CONCACAF Gold Cup,2023,accurateCrosses,1.0,True
+CONCACAF Gold Cup,2023,successfulDribbles,1.0,True
+CONCACAF Gold Cup,2023,ballRecovery,0.0,False

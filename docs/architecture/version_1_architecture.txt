@@ -1,0 +1,298 @@
+version_1_architecture
+
+# Version 1 Architecture
+
+## Purpose
+
+The World Cup 2026 Data Science Project is a football intelligence,
+prediction, and simulation platform.
+
+Its purpose is not merely to predict football matches.
+
+Its purpose is to transform football evidence into simulated football
+competitions through a sequence of well-defined, independently
+validated layers.
+
+Each layer has a single responsibility.
+
+Research is conducted independently from production simulation.
+
+Production components are promoted only after passing explicit
+validation studies.
+
+---
+
+# Guiding Philosophy
+
+Version 1 follows several architectural principles.
+
+1. Football meaning precedes model complexity.
+
+Every feature should represent a meaningful football concept rather
+than merely improving statistical fit.
+
+2. Prediction and realization are separate problems.
+
+Predicting expected goals and generating a scoreline are distinct
+responsibilities.
+
+3. Research and production are separate concerns.
+
+Research discovers models.
+
+Production consumes validated artifacts.
+
+4. Time validity is part of correctness.
+
+Every prediction should use only information available before the
+prediction date.
+
+5. Negative research results are valuable.
+
+Rejected ideas remain documented so they are not repeatedly
+rediscovered.
+
+---
+
+# Conceptual Architecture
+
+Version 1 transforms football information through the following layers.
+
+Evidence
+    ↓
+Football Intelligence
+    ↓
+Team Representation
+    ↓
+Repository
+    ↓
+Match Observation
+    ↓
+Goal Prediction
+    ↓
+Football Realization
+    ↓
+Competition Simulation
+    ↓
+Simulation Results
+
+Each layer has a clearly defined responsibility.
+
+---
+
+# Layer Descriptions
+
+## Evidence
+
+Evidence represents raw football information.
+
+Examples include
+
+- player statistics
+- historical match results
+- competition membership
+- ClubElo histories
+- FIFA rankings
+
+Evidence is never consumed directly by production prediction.
+
+---
+
+## Football Intelligence
+
+Football intelligence converts evidence into player and team
+representations.
+
+Player intelligence is responsible for estimating football ability,
+roles, uncertainty, and evidence quality.
+
+---
+
+## Team Representation
+
+A team representation summarizes football ability through player
+aggregation.
+
+Current production representations include
+
+- attack
+- midfield
+- defense
+- goalkeeper
+- attack depth
+- squad quality
+- evidence quality
+
+Representations intentionally exclude external rating priors.
+
+---
+
+## Repository
+
+Repositories provide validated representations for a defined football
+population.
+
+Repositories do not perform prediction.
+
+Repositories do not perform feature engineering.
+
+Repositories are stable data products.
+
+---
+
+## Match Observation
+
+A match observation combines
+
+- home representation
+- away representation
+- external rating priors
+- fixture context
+- prediction date
+
+The observation is the complete input to the prediction model.
+
+---
+
+## Goal Prediction
+
+Goal prediction converts a match observation into
+
+λ_home
+
+λ_away
+
+Prediction models never generate scorelines directly.
+
+---
+
+## Football Realization
+
+Football realization transforms expected goals into one stochastic
+football outcome.
+
+Current realization uses the Dixon–Coles hierarchical goal sampler.
+
+---
+
+## Competition Simulation
+
+Competition infrastructure organizes match realizations according to
+league or tournament rules.
+
+Competition logic is independent of prediction models.
+
+---
+
+# Production Architecture
+
+The production club prediction route is
+
+Production Repository
+        +
+Prediction-date ClubElo
+        ↓
+Live Match Observation
+        ↓
+Integrated Club Goal Model v1
+        ↓
+Expected Goals
+        ↓
+Dixon–Coles Sampler
+        ↓
+Match Result
+        ↓
+Competition Engine
+
+---
+
+# National-Team Architecture
+
+National-team simulation currently follows an independent production
+path.
+
+National Repository
+        +
+FIFA Rating Prior
+        ↓
+National Goal Model
+        ↓
+Expected Goals
+        ↓
+Shared Scoreline Sampler
+
+This separation reflects differences in available evidence and model
+training rather than architectural inconsistency.
+
+---
+
+# Research Architecture
+
+Research surrounds production rather than replacing it.
+
+Research Question
+        ↓
+Study
+        ↓
+Benchmark
+        ↓
+Evidence
+        ↓
+Decision
+
+Successful studies produce production artifacts.
+
+Negative studies remain part of the permanent evidence base.
+
+---
+
+# Stable Version 1 Interfaces
+
+Version 1 considers the following interfaces stable.
+
+- Team Representation
+- Repository schema
+- Match Observation
+- Goal Predictor
+- Expected Goals interface
+- Scoreline sampler interface
+- Competition interface
+
+These interfaces may support future models without changing downstream
+components.
+
+---
+
+# Scope of Version 1
+
+Version 1 provides
+
+- player-derived football intelligence
+- production club goal prediction
+- production national-team prediction
+- calendar-aware competition simulation
+- model-agnostic competition infrastructure
+- reproducible research studies
+
+Version 1 does not yet include
+
+- dynamic live lineup prediction
+- realistic fixture congestion
+- transfer windows
+- injury modeling
+- tactical adaptation
+- in-match state simulation
+
+These remain future research directions.
+
+---
+
+# Version 1 Status
+
+Version 1 establishes a complete scoreline-first football simulation
+platform.
+
+Research components are promoted only through explicit validation.
+
+Prediction, realization, and competition simulation remain independent
+architectural layers.
