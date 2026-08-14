@@ -13,9 +13,18 @@ from simulation.match_sampler import MatchSampler
 import random
 
 
-_PERSISTENT_MATCH_SAMPLER = MatchSampler(mode="ml")
+_PERSISTENT_MATCH_SAMPLER = None
 _MATCH_PROBABILITY_CACHE = {}
 
+def get_persistent_match_sampler() -> MatchSampler:
+    global _PERSISTENT_MATCH_SAMPLER
+
+    if _PERSISTENT_MATCH_SAMPLER is None:
+        _PERSISTENT_MATCH_SAMPLER = MatchSampler(
+            mode="ml",
+        )
+
+    return _PERSISTENT_MATCH_SAMPLER
 
 def repository_entry_to_poisson_features(team_entry):
     rating_prior = team_entry.get(
@@ -190,7 +199,7 @@ def get_cached_probabilities(team1_data, team2_data):
 
     if key not in _MATCH_PROBABILITY_CACHE:
         _MATCH_PROBABILITY_CACHE[key] = (
-            _PERSISTENT_MATCH_SAMPLER.adapter.predict_match_probabilities(
+            get_persistent_match_sampler().adapter.predict_match_probabilities(
                 team1_data,
                 team2_data,
             )
