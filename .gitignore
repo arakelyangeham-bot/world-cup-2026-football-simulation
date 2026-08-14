@@ -128,3 +128,6 @@ outputs/
 
 # Generated interactive reports
 /reports/interactive/
+
+# Third-party reference documents retained locally only
+/data/raw/FWC2026_regulations_EN.pdf

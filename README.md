@@ -504,3 +504,10 @@ This project has been developed as an independent learning and research effort.
 
 It began with player statistics and World Cup simulation and gradually expanded into a vehicle for learning and applying software engineering, data science, statistical modeling, simulation, experimental design, and football analytics.
 
+## License
+
+Project-authored source code and documentation are available under the MIT License. See [`LICENSE`](LICENSE).
+
+Third-party data, documents, trademarks, and other externally sourced material are not relicensed by this project and remain subject to the terms and rights of their respective owners and providers.
+
+The repository's use of football data from external sources does not imply affiliation with or endorsement by those providers or governing bodies.
