@@ -1,6 +1,6 @@
 # audit_wc2026_structure.py
 
-from wc2026_data import GROUPS
+from scripts.wc2026_data import GROUPS
 
 
 def main():

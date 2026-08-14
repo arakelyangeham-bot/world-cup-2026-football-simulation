@@ -1,17 +1,17 @@
 # audit_round_of_32_builder.py
 
-from wc2026_group_stage import (
+from scripts.wc2026_group_stage import (
     simulate_group_stage,
     extract_qualifiers_from_standings,
 )
-from team_strength_loader import load_poisson_team_strengths
-from wc2026_knockout_mapping import build_round_of_32
+from scripts.team_strength_loader import load_team_repository
+from scripts.wc2026_knockout_mapping import build_round_of_32
 
 
 def main():
-    strengths = load_poisson_team_strengths()
+    team_repository = load_team_repository()
 
-    standings = simulate_group_stage(strengths)
+    standings = simulate_group_stage(team_repository)
     qualifiers = extract_qualifiers_from_standings(standings)
 
     matches = build_round_of_32(qualifiers)

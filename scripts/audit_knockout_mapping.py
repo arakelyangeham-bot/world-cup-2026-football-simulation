@@ -1,6 +1,6 @@
 # audit_knockout_mapping.py
 
-from wc2026_knockout_mapping import (
+from scripts.wc2026_knockout_mapping import (
     ROUND_OF_32_FIXED_MATCHES,
     THIRD_PLACE_ASSIGNMENTS,
     THIRD_PLACE_MATCH_ORDER,
