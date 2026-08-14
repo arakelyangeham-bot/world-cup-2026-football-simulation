@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import subprocess
 import sys
 import time
@@ -69,6 +70,37 @@ STAGES = [
     ),
 ]
 
+def parse_arguments() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Run the authoritative WC 2026 Player Intelligence "
+            "production pipeline."
+        )
+    )
+
+    parser.add_argument(
+        "--list-stages",
+        action="store_true",
+        help=(
+            "Display the production pipeline stages without "
+            "executing them."
+        ),
+    )
+
+    return parser.parse_args()
+
+def print_stages() -> None:
+    print("Pipeline stages:")
+
+    for index, stage in enumerate(
+        STAGES,
+        start=1,
+    ):
+        print(
+            f"  {index}. "
+            f"{stage.name:<20} "
+            f"{stage.module}"
+        )
 
 def run_stage(stage: Stage) -> None:
     command = [
@@ -106,20 +138,16 @@ def run_stage(stage: Stage) -> None:
 
 
 def main() -> None:
+    arguments = parse_arguments()
+
     print("WC 2026 Player Intelligence pipeline")
     print(f"Project root: {PROJECT_ROOT}")
     print()
-    print("Pipeline stages:")
 
-    for index, stage in enumerate(
-        STAGES,
-        start=1,
-    ):
-        print(
-            f"  {index}. "
-            f"{stage.name:<20} "
-            f"{stage.module}"
-        )
+    print_stages()
+
+    if arguments.list_stages:
+        return
 
     pipeline_start = time.time()
 
