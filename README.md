@@ -283,6 +283,64 @@ Some acquisition workflows use Playwright and may require installation of its br
 
 ---
 
+## Quick Start
+
+### Inspect the Player Intelligence pipeline
+
+The authoritative Player Intelligence production pipeline can be inspected without executing it:
+
+```bash
+python -m scripts.run_player_intelligence_pipeline --list-stages
+
+To display the available command-line options:
+
+python -m scripts.run_player_intelligence_pipeline --help
+
+Running the command without an inspection option executes the complete production pipeline:
+
+python -m scripts.run_player_intelligence_pipeline
+
+The full pipeline requires the necessary locally acquired raw player data and may take several minutes to complete.
+
+Run the World Cup Monte Carlo simulator
+
+Display the available simulator options:
+
+python -m scripts.monte_carlo_driver --help
+
+Run the default simulation:
+
+python -m scripts.monte_carlo_driver
+
+The default configuration runs 1,000 tournaments with random seed 42.
+
+A custom run can be requested without modifying source code:
+
+python -m scripts.monte_carlo_driver --simulations 10000 --seed 42 --output-dir outputs/monte_carlo_10000
+
+Generated simulation outputs are written under outputs/ and are intentionally excluded from version control.
+
+Run the automated test suite
+python -m pytest
+
+The formal automated tests live under tests/. Pytest is configured to use that directory as the project test suite.
+
+
+
+One wording detail is deliberate: I wrote that the Player Intelligence pipeline requires **locally acquired raw data** rather than implying a clean clone can immediately execute the 30-minute production build. That's consistent with the acquisition boundary we established.
+
+
+Save it and run:
+
+
+```powershell
+git diff -- README.md
+
+Then:
+
+git status
+```
+
 ## Data and Reproducibility
 
 The repository is designed to be **source-reconstructible rather than self-contained**.
@@ -445,3 +503,4 @@ The World Cup remains the central application, but the architecture is intended 
 This project has been developed as an independent learning and research effort.
 
 It began with player statistics and World Cup simulation and gradually expanded into a vehicle for learning and applying software engineering, data science, statistical modeling, simulation, experimental design, and football analytics.
+
