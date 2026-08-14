@@ -302,44 +302,58 @@ python -m scripts.run_player_intelligence_pipeline
 
 The full pipeline requires the necessary locally acquired raw player data and may take several minutes to complete.
 
-Run the World Cup Monte Carlo simulator
+### Run the World Cup Monte Carlo simulator
 
 Display the available simulator options:
 
+```bash
 python -m scripts.monte_carlo_driver --help
+```
 
-Run the default simulation:
+The simulator requires a locally built team repository. The default Version 1 configuration uses:
 
+```text
+data/processed/wc_2026_team_strength.csv
+```
+
+This generated artifact is intentionally excluded from version control. It is produced from locally prepared player/model features by:
+
+```bash
+python -m scripts.sofascore_team_aggregator
+```
+
+The team aggregator itself requires the locally generated input:
+
+```text
+data/processed/wc_2026_model_features.csv
+```
+
+The repository therefore does not provide a clone-and-run World Cup forecast without first reconstructing the required football-data pipeline.
+
+Once the required team repository has been built, run the default simulation:
+
+```bash
 python -m scripts.monte_carlo_driver
+```
 
 The default configuration runs 1,000 tournaments with random seed 42.
 
 A custom run can be requested without modifying source code:
 
+```bash
 python -m scripts.monte_carlo_driver --simulations 10000 --seed 42 --output-dir outputs/monte_carlo_10000
-
-Generated simulation outputs are written under outputs/ and are intentionally excluded from version control.
-
-Run the automated test suite
-python -m pytest
-
-The formal automated tests live under tests/. Pytest is configured to use that directory as the project test suite.
-
-
-
-One wording detail is deliberate: I wrote that the Player Intelligence pipeline requires **locally acquired raw data** rather than implying a clean clone can immediately execute the 30-minute production build. That's consistent with the acquisition boundary we established.
-
-
-Save it and run:
-
-
-```powershell
-git diff -- README.md
-
-Then:
-
-git status
 ```
+
+Generated simulation outputs are written under `outputs/` and are intentionally excluded from version control.
+
+### Run the automated test suite
+
+```bash
+python -m pytest
+```
+
+The formal automated tests live under `tests/`. Pytest is configured to use that directory as the project test suite.
+
 
 ## Data and Reproducibility
 
