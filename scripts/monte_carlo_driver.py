@@ -1,5 +1,6 @@
 # monte_carlo_driver.py
 
+import argparse
 from collections import Counter
 import random
 from pathlib import Path
@@ -15,6 +16,46 @@ from simulation.observers import (
     SimulationStatistics,
     ExtremeEventsObserver,
 )
+
+def parse_arguments() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Run the WC 2026 Monte Carlo tournament simulator "
+            "and write tournament probability outputs."
+        )
+    )
+
+    parser.add_argument(
+        "--simulations",
+        type=int,
+        default=1000,
+        help=(
+            "Number of tournament simulations to run. "
+            "Default: 1000."
+        ),
+    )
+
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=42,
+        help=(
+            "Random seed used for Python and NumPy. "
+            "Default: 42."
+        ),
+    )
+
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=Path("outputs/monte_carlo"),
+        help=(
+            "Directory for generated Monte Carlo CSV outputs. "
+            "Default: outputs/monte_carlo."
+        ),
+    )
+
+    return parser.parse_args()
 
 def counter_to_prob_rows(counter: Counter, n: int) -> list[dict]:
     return [
@@ -207,21 +248,53 @@ def write_outputs(results: dict, output_dir: str = "outputs/monte_carlo") -> Non
     print(f"Wrote Monte Carlo outputs to: {output_path}")
 
 def main():
-    n = 1000
-    seed = 42
+    arguments = parse_arguments()
 
-    results = run_monte_carlo(n=n, seed=seed)
+    if arguments.simulations <= 0:
+        raise SystemExit(
+            "--simulations must be greater than zero."
+        )
+
+    n = arguments.simulations
+    seed = arguments.seed
+
+    results = run_monte_carlo(
+        n=n,
+        seed=seed,
+    )
 
     print(f"Simulations: {n}")
     print(f"Seed: {seed}")
 
-    print_table("Champion probability", results["champion"])
-    print_table("Runner-up probability", results["runner_up"])
-    print_table("Semifinal appearances", results["semifinal"])
-    print_table("Quarterfinal appearances", results["quarterfinal"])
-    print_table("Round of 16 appearances", results["round_of_16"])
-    print_statistics(results["statistics"])
-    write_outputs(results)
+    print_table(
+        "Champion probability",
+        results["champion"],
+    )
+    print_table(
+        "Runner-up probability",
+        results["runner_up"],
+    )
+    print_table(
+        "Semifinal appearances",
+        results["semifinal"],
+    )
+    print_table(
+        "Quarterfinal appearances",
+        results["quarterfinal"],
+    )
+    print_table(
+        "Round of 16 appearances",
+        results["round_of_16"],
+    )
+
+    print_statistics(
+        results["statistics"]
+    )
+
+    write_outputs(
+        results,
+        output_dir=arguments.output_dir,
+    )
 
 
 if __name__ == "__main__":
