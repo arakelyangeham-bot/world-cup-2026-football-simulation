@@ -162,10 +162,24 @@ class FootballModelAdapter:
         )
 
         if repository_source == "premier_league_production_v1":
+            repository_path = Path(
+                condition.parameters.get(
+                    "repository_path",
+                    DEFAULT_CLUB_REPOSITORY_PATH,
+                )
+            )
+
+            artifact_path = Path(
+                condition.parameters.get(
+                    "production_artifact",
+                    DEFAULT_CLUB_GOAL_MODEL_ARTIFACT,
+                )
+            )
+
             return self._build_production_club_model(
                 condition,
-                repository_path=DEFAULT_CLUB_REPOSITORY_PATH,
-                artifact_path=DEFAULT_CLUB_GOAL_MODEL_ARTIFACT,
+                repository_path=repository_path,
+                artifact_path=artifact_path,
                 repository_source_name="premier_league_production_v1",
             )
 
@@ -265,10 +279,15 @@ class FootballModelAdapter:
             LiveMatchObservationBuilder(
                 club_repository=production_repository,
                 clubelo_repository=clubelo_repository,
-                clubelo_name_overrides=(
-                    DEFAULT_CLUBELO_NAME_OVERRIDES
+                clubelo_name_overrides=DEFAULT_CLUBELO_NAME_OVERRIDES,
+                rating_prediction_date=(
+                    date.fromisoformat(
+                        condition.parameters["rating_prediction_date"]
+                    )
+                    if condition.parameters.get("rating_prediction_date")
+                    else None
                 ),
-           )
+            )
         )
 
 

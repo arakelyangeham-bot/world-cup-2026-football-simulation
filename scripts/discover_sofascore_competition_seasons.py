@@ -24,6 +24,10 @@ LEAGUES = {
         "display_name": "Premier League",
         "unique_tournament_id": 17,
     },
+    "championship": {
+        "display_name": "Championship",
+        "unique_tournament_id": 18,
+    },
     "la_liga": {
         "display_name": "La Liga",
         "unique_tournament_id": 8,

@@ -55,6 +55,9 @@ DEFAULT_CLUBELO_NAME_OVERRIDES = {
     "West Ham United": "WestHam",
     "Wolverhampton": "Wolves",
     "Wolverhampton Wanderers": "Wolves",
+    "Coventry City": "Coventry",
+    "Hull City": "Hull",
+    "Ipswich Town": "Ipswich",
 }
 
 @dataclass(frozen=True)
@@ -412,6 +415,7 @@ class LiveMatchObservationBuilder:
         clubelo_name_overrides: (
             Mapping[str, str] | None
         ) = None,
+        rating_prediction_date: date | None = None
     ) -> None:
         self.club_repository = (
             club_repository
@@ -428,6 +432,8 @@ class LiveMatchObservationBuilder:
                 or {}
             ).items()
         }
+
+        self.rating_prediction_date = rating_prediction_date
 
         self._validate_model_contract()
 
@@ -531,6 +537,12 @@ class LiveMatchObservationBuilder:
             )
         )
 
+        rating_date = (
+            self.rating_prediction_date
+            if self.rating_prediction_date is not None
+            else parsed_date
+        )
+
         home = (
             self.club_repository
             .resolve_club(
@@ -553,14 +565,14 @@ class LiveMatchObservationBuilder:
         home_rating = (
             self._resolve_rating(
                 representation=home,
-                prediction_date=parsed_date,
+                prediction_date=rating_date,
             )
         )
 
         away_rating = (
             self._resolve_rating(
                 representation=away,
-                prediction_date=parsed_date,
+                prediction_date=rating_date,
             )
         )
 
