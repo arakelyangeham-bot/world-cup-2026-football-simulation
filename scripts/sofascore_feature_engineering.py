@@ -177,12 +177,34 @@ METADATA = [
     "totwAppearances"
 ]
 
-minutes = df["minutesPlayed"].replace(0, pd.NA)
+minutes = (
+    pd.to_numeric(
+        df["minutesPlayed"],
+        errors="coerce",
+    )
+    .replace(0, pd.NA)
+)
 
 for stat in TOTAL_STATS:
-    if stat in df.columns:
-        df[stat] = pd.to_numeric(df[stat], errors="coerce")
-        df[f"{stat}_per90"] = df[stat] * 90 / minutes
+    #
+    # Preserve a stable engineered schema across
+    # competitions. Some Sofascore competitions do not
+    # expose every production source statistic.
+    #
+    # Missing source evidence is represented explicitly
+    # as NA rather than by omitting the feature column.
+    #
+    if stat not in df.columns:
+        df[stat] = pd.NA
+
+    df[stat] = pd.to_numeric(
+        df[stat],
+        errors="coerce",
+    )
+
+    df[f"{stat}_per90"] = (
+        df[stat] * 90 / minutes
+    )
 
 output_file.parent.mkdir(
     parents=True,

@@ -32,6 +32,10 @@ LEAGUES = {
         "display_name": "La Liga",
         "unique_tournament_id": 8,
     },
+    "segunda": {
+        "display_name": "LaLiga 2",
+        "unique_tournament_id": 54,
+    },
     "serie_a": {
         "display_name": "Serie A",
         "unique_tournament_id": 23,
