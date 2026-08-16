@@ -45,11 +45,17 @@ class LeagueMonteCarloRunner:
         participants: Iterable[str],
         fixtures: list[ScheduledFixture],
         football_model: Any,
+        top_four_count: int = 4,
+        top_six_count: int = 6,
+        relegation_count: int = 3,
     ) -> None:
         self.definition = definition
         self.participants = list(participants)
         self.fixtures = list(fixtures)
         self.football_model = football_model
+        self.top_four_count = top_four_count
+        self.top_six_count = top_six_count
+        self.relegation_count = relegation_count
 
         if not self.participants:
             raise ValueError(
@@ -59,6 +65,49 @@ class LeagueMonteCarloRunner:
         if not self.fixtures:
             raise ValueError(
                 "fixtures cannot be empty."
+            )
+
+        participant_count = len(
+            self.participants
+        )
+
+        if not (
+            1
+            <= self.top_four_count
+            <= participant_count
+        ):
+            raise ValueError(
+                "top_four_count must be between "
+                "1 and participant count."
+            )
+
+        if not (
+            1
+            <= self.top_six_count
+            <= participant_count
+        ):
+            raise ValueError(
+                "top_six_count must be between "
+                "1 and participant count."
+            )
+
+        if (
+            self.top_four_count
+            > self.top_six_count
+        ):
+            raise ValueError(
+                "top_four_count cannot exceed "
+                "top_six_count."
+            )
+
+        if not (
+            1
+            <= self.relegation_count
+            < participant_count
+        ):
+            raise ValueError(
+                "relegation_count must be between "
+                "1 and participant count - 1."
             )
 
     def _simulate_one_season(
@@ -170,17 +219,23 @@ class LeagueMonteCarloRunner:
                 standings[0]["team"]
             ] += 1
 
-            for row in standings[:4]:
+            for row in standings[
+                : self.top_four_count
+            ]:
                 top_four_counts[
                     row["team"]
                 ] += 1
 
-            for row in standings[:6]:
+            for row in standings[
+                : self.top_six_count
+            ]:
                 top_six_counts[
                     row["team"]
                 ] += 1
 
-            for row in standings[-3:]:
+            for row in standings[
+                -self.relegation_count :
+            ]:
                 relegation_counts[
                     row["team"]
                 ] += 1

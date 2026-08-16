@@ -40,6 +40,10 @@ LEAGUES = {
         "display_name": "Bundesliga",
         "unique_tournament_id": 35,
     },
+    "2_bundesliga": {
+        "display_name": "2. Bundesliga",
+        "unique_tournament_id": 44,
+    },
     "ligue_1": {
         "display_name": "Ligue 1",
         "unique_tournament_id": 34,
@@ -68,6 +72,7 @@ TARGET_START_YEARS = {
     2023,
     2024,
     2025,
+    2026,
 }
 
 OUTPUT_COLUMNS = [
@@ -313,6 +318,70 @@ def validate_registry_rows(
         )
 
 
+
+def read_registry_csv(
+    path: Path,
+) -> list[dict[str, Any]]:
+    if not path.exists():
+        return []
+
+    with path.open(
+        "r",
+        encoding="utf-8",
+        newline="",
+    ) as handle:
+        reader = csv.DictReader(
+            handle
+        )
+
+        missing_columns = (
+            set(OUTPUT_COLUMNS)
+            - set(reader.fieldnames or [])
+        )
+
+        if missing_columns:
+            raise ValueError(
+                "Existing registry is missing required "
+                "columns: "
+                f"{sorted(missing_columns)}"
+            )
+
+        return [
+            dict(row)
+            for row in reader
+        ]
+
+
+def merge_registry_rows(
+    *,
+    existing_rows: list[dict[str, Any]],
+    refreshed_rows: list[dict[str, Any]],
+    refreshed_competition_keys: list[str],
+) -> list[dict[str, Any]]:
+    refreshed_keys = set(
+        refreshed_competition_keys
+    )
+
+    preserved_rows = [
+        row
+        for row in existing_rows
+        if row["competition_key"]
+        not in refreshed_keys
+    ]
+
+    merged_rows = (
+        preserved_rows
+        + refreshed_rows
+    )
+
+    return sorted(
+        merged_rows,
+        key=lambda row: (
+            row["competition_key"],
+            int(row["season_start_year"]),
+        ),
+    )
+
 def write_registry_csv(
     rows: list[dict[str, Any]],
     output_path: Path,
@@ -465,6 +534,16 @@ def main() -> None:
         target_start_years=(
             target_start_years
         ),
+    )
+
+    existing_rows = read_registry_csv(
+        arguments.output
+    )
+
+    rows = merge_registry_rows(
+        existing_rows=existing_rows,
+        refreshed_rows=rows,
+        refreshed_competition_keys=competition_keys,
     )
 
     write_registry_csv(
