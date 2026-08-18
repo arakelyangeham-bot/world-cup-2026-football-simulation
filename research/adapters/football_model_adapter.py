@@ -164,6 +164,7 @@ class FootballModelAdapter:
         if repository_source in {
             "premier_league_production_v1",
             "la_liga_production_v1",
+            "bundesliga_production_v1",
         }:
             repository_path = Path(
                 condition.parameters.get(

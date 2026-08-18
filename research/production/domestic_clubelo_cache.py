@@ -53,14 +53,18 @@ def preload_one_history(
         try:
             existed_before = expected_path.exists()
 
-            if existed_before:
+            uses_alias = (
+                clubelo_lookup_name != production_club
+            )
+
+            if uses_alias:
                 dataframe = repository.get_history(
-                    production_club,
+                    clubelo_lookup_name,
                     refresh=False,
                 )
             else:
                 dataframe = repository.get_history(
-                    clubelo_lookup_name,
+                    production_club,
                     refresh=False,
                 )
 
@@ -89,7 +93,10 @@ def preload_one_history(
             # If ClubElo required an alias, persist the validated
             # history under the production club identity as well.
             #
-            if not expected_path.exists():
+            if (
+                uses_alias
+                or not expected_path.exists()
+            ):
                 repository.save_history(
                     club_name=production_club,
                     dataframe=dataframe,

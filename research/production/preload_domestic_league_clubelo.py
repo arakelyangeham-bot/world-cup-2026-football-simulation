@@ -19,6 +19,10 @@ from simulation.domestic_league_configs import (
     DOMESTIC_LEAGUE_CONFIGS,
 )
 
+from research.studies.study_079_bundesliga_live_observation_integration.audit_bundesliga_clubelo_cache import (
+    BUNDESLIGA_CLUBELO_NAME_OVERRIDES,
+)
+
 
 LA_LIGA_CLUBELO_NAME_OVERRIDES = {
     "Athletic Club": "Bilbao",
@@ -34,6 +38,15 @@ LA_LIGA_CLUBELO_NAME_OVERRIDES = {
     "Real Madrid": "realmadrid",
     "Real Racing Club": "Santander",
     "Real Sociedad": "Sociedad",
+}
+
+BUNDESLIGA_2026_27_CLUBELO_NAME_OVERRIDES = {
+    **BUNDESLIGA_CLUBELO_NAME_OVERRIDES,
+    "1. FC Köln": "Koeln",
+    "FC Schalke 04": "Schalke",
+    "Hamburger SV": "Hamburg",
+    "SC Paderborn 07": "Paderborn",
+    "SV 07 Elversberg": "Elversberg",
 }
 
 
@@ -74,12 +87,21 @@ def main() -> None:
         .tolist()
     )
 
-    name_overrides = {}
-
-    if arguments.competition == "la_liga":
-        name_overrides = (
+    name_overrides_by_competition = {
+        "la_liga": (
             LA_LIGA_CLUBELO_NAME_OVERRIDES
+        ),
+        "bundesliga": (
+            BUNDESLIGA_2026_27_CLUBELO_NAME_OVERRIDES
+        ),
+    }
+
+    name_overrides = (
+        name_overrides_by_competition.get(
+            arguments.competition,
+            {},
         )
+    )
 
     repository = ClubEloRepository(
         cache_directory=CLUBELO_CACHE_DIRECTORY,

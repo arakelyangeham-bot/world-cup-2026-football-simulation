@@ -100,6 +100,66 @@ class SofascoreLeagueFixtureSnapshotConfig:
                 f"{self.timezone_name!r}."
             ) from exc
 
+def parse_arguments() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Build a canonical Sofascore fixture snapshot "
+            "for a domestic league season."
+        )
+    )
+
+    parser.add_argument(
+        "--competition",
+        required=True,
+    )
+
+    parser.add_argument(
+        "--season",
+        required=True,
+    )
+
+    parser.add_argument(
+        "--unique-tournament-id",
+        type=int,
+        required=True,
+    )
+
+    parser.add_argument(
+        "--season-id",
+        type=int,
+        required=True,
+    )
+
+    parser.add_argument(
+        "--participant-count",
+        type=int,
+        required=True,
+    )
+
+    parser.add_argument(
+        "--matchday-count",
+        type=int,
+        required=True,
+    )
+
+    parser.add_argument(
+        "--fixture-count",
+        type=int,
+        required=True,
+    )
+
+    parser.add_argument(
+        "--timezone-name",
+        required=True,
+    )
+
+    parser.add_argument(
+        "--output-path",
+        type=Path,
+        required=True,
+    )
+
+    return parser.parse_args()
 
 def fetch_round(
     config: SofascoreLeagueFixtureSnapshotConfig,
@@ -391,17 +451,63 @@ def write_fixture_snapshot(
         index=False,
     )
 
-config = SofascoreLeagueFixtureSnapshotConfig(
-    competition="La Liga",
-    season="2026-27",
-    unique_tournament_id=8,
-    season_id=97268,
-    participant_count=20,
-    matchday_count=38,
-    fixture_count=380,
-    timezone_name="Europe/Madrid",
-    output_path=Path(
-        "outputs/la_liga_2026_27_bootstrap/"
-        "la_liga_2026_27_fixtures.csv"
-    ),
-)
+def main() -> None:
+    arguments = parse_arguments()
+
+    config = SofascoreLeagueFixtureSnapshotConfig(
+        competition=arguments.competition,
+        season=arguments.season,
+        unique_tournament_id=(
+            arguments.unique_tournament_id
+        ),
+        season_id=arguments.season_id,
+        participant_count=(
+            arguments.participant_count
+        ),
+        matchday_count=(
+            arguments.matchday_count
+        ),
+        fixture_count=arguments.fixture_count,
+        timezone_name=arguments.timezone_name,
+        output_path=arguments.output_path,
+    )
+
+    fixtures = build_fixture_snapshot(
+        config
+    )
+
+    write_fixture_snapshot(
+        config=config,
+        fixtures=fixtures,
+    )
+
+    print()
+    print(
+        f"{config.competition.upper()} "
+        f"{config.season} FIXTURE SNAPSHOT"
+    )
+    print("=" * 72)
+
+    print("Fixtures:", len(fixtures))
+    print(
+        "Teams:",
+        len(
+            set(fixtures["home_team"])
+            | set(fixtures["away_team"])
+        ),
+    )
+    print(
+        "Matchdays:",
+        fixtures["matchday"].nunique(),
+    )
+    print(
+        "Output:",
+        config.output_path,
+    )
+
+    print()
+    print("Fixture snapshot: PASS")
+
+
+if __name__ == "__main__":
+    main()
