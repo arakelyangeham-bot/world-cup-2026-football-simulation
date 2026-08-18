@@ -161,7 +161,10 @@ class FootballModelAdapter:
             condition.repository_source
         )
 
-        if repository_source == "premier_league_production_v1":
+        if repository_source in {
+            "premier_league_production_v1",
+            "la_liga_production_v1",
+        }:
             repository_path = Path(
                 condition.parameters.get(
                     "repository_path",
@@ -180,7 +183,7 @@ class FootballModelAdapter:
                 condition,
                 repository_path=repository_path,
                 artifact_path=artifact_path,
-                repository_source_name="premier_league_production_v1",
+                repository_source_name=repository_source,
             )
 
         if repository_source == "premier_league_robust_candidate_v1":

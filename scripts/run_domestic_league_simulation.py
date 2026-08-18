@@ -66,8 +66,8 @@ DEFAULT_SEED = 202627
 def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Run Monte Carlo simulations of the "
-            "2026-27 Premier League season."
+            "Run Monte Carlo simulations of a "
+            "configured domestic league season."
         )
     )
 
@@ -108,25 +108,25 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--fixture-path",
         type=None,
-        default=DEFAULT_FIXTURE_PATH,
+        default=None,
     )
 
     parser.add_argument(
         "--repository-path",
         type=None,
-        default=DEFAULT_REPOSITORY_PATH,
+        default=None,
     )
 
     parser.add_argument(
         "--goal-model-path",
         type=None,
-        default=DEFAULT_GOAL_MODEL_PATH,
+        default=None,
     )
 
     parser.add_argument(
         "--output-dir",
         type=None,
-        default=DEFAULT_OUTPUT_DIRECTORY,
+        default=None,
     )
 
     parser.add_argument(
@@ -365,6 +365,8 @@ def validate_result(
 
 def build_metadata(
     *,
+    competition_name: str,
+    season: str,
     model_mode: str,
     simulation_count: int,
     seed: int,
@@ -375,10 +377,8 @@ def build_metadata(
     goal_model_path: Path,
 ) -> dict[str, Any]:
     return {
-        "competition":
-            "Premier League",
-        "season":
-            "2026-27",
+        "competition": competition_name,
+        "season": season,
         "model_mode":
             model_mode,
         "simulation_count":
@@ -434,12 +434,14 @@ def build_metadata(
 def print_summary(
     rows: list[dict[str, Any]],
     *,
+    competition_name: str,
+    season: str,
     model_mode: str,
     simulation_count: int,
 ) -> None:
     print()
     print(
-        "Premier League 2026-27 "
+        f"{competition_name} {season} "
         "Monte Carlo Simulation"
     )
     print("=" * 84)
@@ -633,10 +635,6 @@ def main() -> None:
         )
     )
 
-    output_directory = (
-        arguments.output_dir
-    )
-
     output_directory.mkdir(
         parents=True,
         exist_ok=True,
@@ -655,6 +653,8 @@ def main() -> None:
     )
 
     metadata = build_metadata(
+        competition_name=config.competition_name,
+        season=config.season,
         model_mode=arguments.model,
         simulation_count=(
             arguments.simulations
@@ -663,13 +663,13 @@ def main() -> None:
         fixtures=fixtures,
         participants=participants,
         fixture_path=(
-            arguments.fixture_path
+            fixture_path
         ),
         repository_path=(
-            arguments.repository_path
+            repository_path
         ),
         goal_model_path=(
-            arguments.goal_model_path
+            goal_model_path
         ),
     )
 
@@ -686,6 +686,8 @@ def main() -> None:
 
     print_summary(
         result.club_rows,
+        competition_name=config.competition_name,
+        season=config.season,
         model_mode=arguments.model,
         simulation_count=(
             arguments.simulations
