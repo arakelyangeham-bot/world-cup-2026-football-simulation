@@ -40,6 +40,10 @@ LEAGUES = {
         "display_name": "Serie A",
         "unique_tournament_id": 23,
     },
+    "serie_b": {
+        "display_name": "Serie B",
+        "unique_tournament_id": 53,
+    },
     "bundesliga": {
         "display_name": "Bundesliga",
         "unique_tournament_id": 35,

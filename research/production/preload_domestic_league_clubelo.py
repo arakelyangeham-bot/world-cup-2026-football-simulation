@@ -19,26 +19,19 @@ from simulation.domestic_league_configs import (
     DOMESTIC_LEAGUE_CONFIGS,
 )
 
+from research.production.domestic_league_onboarding import (
+    DOMESTIC_LEAGUE_ONBOARDING_SPECS,
+)
+
 from research.studies.study_079_bundesliga_live_observation_integration.audit_bundesliga_clubelo_cache import (
     BUNDESLIGA_CLUBELO_NAME_OVERRIDES,
 )
 
-
-LA_LIGA_CLUBELO_NAME_OVERRIDES = {
-    "Athletic Club": "Bilbao",
-    "Atlético Madrid": "Atletico",
-    "Celta Vigo": "Celta",
-    "Deportivo Alavés": "Alaves",
-    "Deportivo de A Coruña": "Depor",
-    "FC Barcelona": "Barcelona",
-    "Levante UD": "Levante",
-    "Málaga CF": "Malaga",
-    "Rayo Vallecano": "rayovallecano",
-    "Real Betis": "Betis",
-    "Real Madrid": "realmadrid",
-    "Real Racing Club": "Santander",
-    "Real Sociedad": "Sociedad",
-}
+from research.production.domestic_clubelo_identity import (
+    LA_LIGA_CLUBELO_NAME_OVERRIDES,
+    SERIE_A_2026_27_CLUBELO_NAME_OVERRIDES,
+    build_clubelo_lookup_candidates,
+)
 
 BUNDESLIGA_2026_27_CLUBELO_NAME_OVERRIDES = {
     **BUNDESLIGA_CLUBELO_NAME_OVERRIDES,
@@ -64,8 +57,16 @@ def parse_arguments() -> argparse.Namespace:
         required=True,
     )
 
-    return parser.parse_args()
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help=(
+            "Print the ClubElo lookup candidate chain "
+            "without making requests or writing caches."
+        ),
+    )
 
+    return parser.parse_args()
 
 def main() -> None:
     arguments = parse_arguments()
@@ -74,12 +75,18 @@ def main() -> None:
         arguments.competition
     ]
 
+    onboarding_spec = (
+        DOMESTIC_LEAGUE_ONBOARDING_SPECS.get(
+            arguments.competition
+        )
+    )
+
     repository_frame = pd.read_csv(
         config.repository_path,
         low_memory=False,
     )
 
-    clubs = sorted(
+    repository_clubs = sorted(
         repository_frame["club"]
         .dropna()
         .astype(str)
@@ -87,12 +94,52 @@ def main() -> None:
         .tolist()
     )
 
+    team_slugs_by_club: dict[str, str] = {}
+
+    if (
+        onboarding_spec is not None
+        and onboarding_spec.target_participants_path.exists()
+    ):
+        participants = pd.read_csv(
+            onboarding_spec.target_participants_path,
+            low_memory=False,
+        )
+
+        required_identity_columns = {
+            "team",
+            "team_slug",
+        }
+
+        if required_identity_columns.issubset(
+            participants.columns
+        ):
+            identity_rows = (
+                participants[
+                    [
+                        "team",
+                        "team_slug",
+                    ]
+                ]
+                .dropna()
+                .drop_duplicates()
+            )
+
+            team_slugs_by_club = {
+                str(row["team"]): str(row["team_slug"])
+                for _, row in identity_rows.iterrows()
+            }
+
+    clubs = repository_clubs
+
     name_overrides_by_competition = {
         "la_liga": (
             LA_LIGA_CLUBELO_NAME_OVERRIDES
         ),
         "bundesliga": (
             BUNDESLIGA_2026_27_CLUBELO_NAME_OVERRIDES
+        ),
+        "serie_a": (
+            SERIE_A_2026_27_CLUBELO_NAME_OVERRIDES
         ),
     }
 
@@ -128,22 +175,48 @@ def main() -> None:
         clubs,
         start=1,
     ):
-        lookup_name = name_overrides.get(
-            production_club,
-            production_club,
+        explicit_lookup = name_overrides.get(
+            production_club
         )
 
-        print(
-            f"[{index}/{len(clubs)}] "
-            f"{production_club} "
-            f"-> {lookup_name}"
+        slug_lookup = team_slugs_by_club.get(
+            production_club
         )
 
-        result = preload_one_history(
-            repository=repository,
+        lookup_candidates = build_clubelo_lookup_candidates(
             production_club=production_club,
-            clubelo_lookup_name=lookup_name,
+            explicit_lookup=explicit_lookup,
+            team_slug=slug_lookup,
         )
+
+        if arguments.dry_run:
+            print(
+                f"[{index}/{len(clubs)}] "
+                f"{production_club} "
+                f"-> "
+                + " -> ".join(lookup_candidates)
+            )
+            continue
+
+        result = None
+
+        for lookup_name in lookup_candidates:
+            print(
+                f"[{index}/{len(clubs)}] "
+                f"{production_club} "
+                f"-> {lookup_name}"
+            )
+
+            candidate_result = preload_one_history(
+                repository=repository,
+                production_club=production_club,
+                clubelo_lookup_name=lookup_name,
+            )
+
+            result = candidate_result
+
+            if candidate_result.status != "FAILED":
+                break
 
         results.append(result)
 
@@ -158,6 +231,11 @@ def main() -> None:
                 f"{result.resolved_club} "
                 f"({result.row_count} rows)"
             )
+
+    if arguments.dry_run:
+        print()
+        print("Dry run complete. No ClubElo requests were made.")
+        return
 
     successful = [
         result

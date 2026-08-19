@@ -42,6 +42,15 @@ CLUBELO_CACHE_DIRECTORY = (
     / "clubelo_histories"
 )
 
+DOMESTIC_PRODUCTION_REPOSITORY_SOURCES = frozenset(
+    {
+        "premier_league_production_v1",
+        "la_liga_production_v1",
+        "bundesliga_production_v1",
+        "serie_a_production_v1",
+    }
+)
+
 
 LEGACY_CLUB_REPOSITORY_SOURCES = {
     "premier_league_validation",
@@ -161,11 +170,7 @@ class FootballModelAdapter:
             condition.repository_source
         )
 
-        if repository_source in {
-            "premier_league_production_v1",
-            "la_liga_production_v1",
-            "bundesliga_production_v1",
-        }:
+        if repository_source in DOMESTIC_PRODUCTION_REPOSITORY_SOURCES:
             repository_path = Path(
                 condition.parameters.get(
                     "repository_path",

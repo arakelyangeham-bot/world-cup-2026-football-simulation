@@ -492,6 +492,65 @@ def print_summary(
             "configured production football model."
         )
 
+def _write_validation_record(
+    *,
+    output_directory: Path,
+    config: DomesticLeagueSimulationConfig,
+    model: str,
+    simulations: int,
+    seed: int,
+    participant_count: int,
+    fixture_count: int,
+    fixture_path: Path,
+    repository_path: Path,
+    goal_model_path: Path,
+) -> Path | None:
+    if model == "structural":
+        filename = "structural_validation.json"
+        validation_type = "structural"
+    elif model == "production" and simulations == 1:
+        filename = "production_validation.json"
+        validation_type = "production"
+    else:
+        return None
+
+    payload = {
+        "status": "PASS",
+        "validation_type": validation_type,
+        "competition_key": config.key,
+        "competition_name": config.competition_name,
+        "season": config.season,
+        "model": model,
+        "simulations": simulations,
+        "seed": seed,
+        "participant_count": participant_count,
+        "fixture_count": fixture_count,
+        "expected_participant_count": config.participant_count,
+        "expected_fixture_count": config.fixture_count,
+        "repository_source": config.repository_source,
+        "fixture_path": str(fixture_path),
+        "repository_path": str(repository_path),
+        "goal_model_path": str(goal_model_path),
+        "recorded_at_utc": datetime.now(
+            timezone.utc
+        ).isoformat(),
+    }
+
+    output_path = (
+        output_directory
+        / filename
+    )
+
+    output_path.write_text(
+        json.dumps(
+            payload,
+            indent=2,
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+
+    return output_path
 
 def main() -> None:
     arguments = parse_arguments()
@@ -684,6 +743,19 @@ def main() -> None:
         encoding="utf-8",
     )
 
+    validation_path = _write_validation_record(
+        output_directory=output_directory,
+        config=config,
+        model=arguments.model,
+        simulations=arguments.simulations,
+        seed=arguments.seed,
+        participant_count=len(participants),
+        fixture_count=len(fixtures),
+        fixture_path=fixture_path,
+        repository_path=repository_path,
+        goal_model_path=goal_model_path,
+    )
+
     print_summary(
         result.club_rows,
         competition_name=config.competition_name,
@@ -698,6 +770,11 @@ def main() -> None:
     print(
         f"Outputs: {output_directory}"
     )
+
+    if validation_path is not None:
+        print(
+            f"Validation: {validation_path}"
+        )
 
 
 if __name__ == "__main__":
