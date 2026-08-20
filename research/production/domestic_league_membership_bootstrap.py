@@ -1,7 +1,7 @@
 #domestic_league_membership_bootstrap
 
 from __future__ import annotations
-
+import argparse
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -378,3 +378,215 @@ def build_domestic_league_membership_candidate(
             sorted(departed_clubs)
         ),
     )
+
+def parse_arguments() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Build a domestic-league target-season membership "
+            "candidate from previous top-flight and promoted-club "
+            "membership evidence."
+        )
+    )
+
+    parser.add_argument(
+        "--target-competition",
+        required=True,
+    )
+
+    parser.add_argument(
+        "--target-competition-id",
+        type=int,
+        required=True,
+    )
+
+    parser.add_argument(
+        "--target-season-id",
+        type=int,
+        required=True,
+    )
+
+    parser.add_argument(
+        "--target-season-year",
+        required=True,
+    )
+
+    parser.add_argument(
+        "--previous-top-flight-competition",
+        required=True,
+    )
+
+    parser.add_argument(
+        "--previous-top-flight-season-year",
+        required=True,
+    )
+
+    parser.add_argument(
+        "--promoted-source-competition",
+        required=True,
+    )
+
+    parser.add_argument(
+        "--promoted-source-season-year",
+        required=True,
+    )
+
+    parser.add_argument(
+        "--target-participants-path",
+        type=Path,
+        required=True,
+    )
+
+    parser.add_argument(
+        "--previous-top-flight-memberships-path",
+        type=Path,
+        required=True,
+    )
+
+    parser.add_argument(
+        "--promoted-source-memberships-path",
+        type=Path,
+        required=True,
+    )
+
+    parser.add_argument(
+        "--output-path",
+        type=Path,
+        required=True,
+    )
+
+    parser.add_argument(
+        "--resolved-output-path",
+        type=Path,
+        default=None,
+        help=(
+            "Optional resolved-membership output path. "
+            "When the candidate contains no duplicate player IDs, "
+            "the validated candidate is promoted unchanged to this path."
+        ),
+    )
+
+    return parser.parse_args()
+
+def promote_unambiguous_membership(
+    *,
+    candidate_path: Path,
+    resolved_output_path: Path,
+) -> int:
+    frame = pd.read_csv(
+        candidate_path,
+        low_memory=False,
+    )
+
+    duplicate_players = int(
+        frame["player_id"]
+        .astype(str)
+        .duplicated()
+        .sum()
+    )
+
+    if duplicate_players:
+        raise ValueError(
+            "Membership candidate still contains "
+            f"{duplicate_players} duplicate player IDs; "
+            "profile-based ambiguity resolution is required."
+        )
+
+    resolved_output_path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    frame.to_csv(
+        resolved_output_path,
+        index=False,
+    )
+
+    return len(frame)
+
+def main() -> None:
+    arguments = parse_arguments()
+
+    config = DomesticLeagueMembershipBootstrapConfig(
+        target_competition=arguments.target_competition,
+        target_competition_id=arguments.target_competition_id,
+        target_season_id=arguments.target_season_id,
+        target_season_year=arguments.target_season_year,
+
+        previous_top_flight_competition=(
+            arguments.previous_top_flight_competition
+        ),
+        previous_top_flight_season_year=(
+            arguments.previous_top_flight_season_year
+        ),
+
+        promoted_source_competition=(
+            arguments.promoted_source_competition
+        ),
+        promoted_source_season_year=(
+            arguments.promoted_source_season_year
+        ),
+
+        target_participants_path=(
+            arguments.target_participants_path
+        ),
+        previous_top_flight_memberships_path=(
+            arguments.previous_top_flight_memberships_path
+        ),
+        promoted_source_memberships_path=(
+            arguments.promoted_source_memberships_path
+        ),
+
+        output_path=arguments.output_path,
+    )
+
+    result = build_domestic_league_membership_candidate(
+        config
+    )
+
+    print()
+    print("Domestic League Membership Bootstrap")
+    print("=" * 72)
+    print(
+        f"Target clubs: {result.target_club_count}"
+    )
+    print(
+        f"Returning clubs: {result.returning_club_count}"
+    )
+    print(
+        f"Promoted clubs: {result.promoted_club_count}"
+    )
+    print(
+        f"Departed clubs: {result.departed_club_count}"
+    )
+    print(
+        f"Membership rows: {result.membership_rows}"
+    )
+    print(
+        f"Unique players: {result.unique_players}"
+    )
+    print(
+        f"Output: {arguments.output_path}"
+    )
+
+    if arguments.resolved_output_path is not None:
+        resolved_rows = promote_unambiguous_membership(
+            candidate_path=arguments.output_path,
+            resolved_output_path=(
+                arguments.resolved_output_path
+            ),
+        )
+
+        print(
+            "Resolution: no ambiguous player IDs detected; "
+            "candidate promoted unchanged."
+        )
+        print(
+            f"Resolved rows: {resolved_rows}"
+        )
+        print(
+            "Resolved output: "
+            f"{arguments.resolved_output_path}"
+        )
+
+if __name__ == "__main__":
+    main()

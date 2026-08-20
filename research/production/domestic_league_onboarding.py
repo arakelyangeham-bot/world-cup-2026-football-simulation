@@ -242,9 +242,172 @@ SERIE_A_2026_27_ONBOARDING = DomesticLeagueOnboardingSpec(
     repository_source="serie_a_production_v1",
 )
 
+LIGUE_1_2026_27_ONBOARDING = DomesticLeagueOnboardingSpec(
+    key="ligue_1",
+    competition_name="Ligue 1",
+    competition_id=34,
+
+    target_season="2026-27",
+    target_season_start_year=2026,
+    target_season_id=96127,
+
+    feeder_key="ligue_2",
+    feeder_competition_name="Ligue 2",
+    feeder_competition_id=182,
+    feeder_season="25/26",
+    feeder_season_start_year=2025,
+    feeder_season_id=77357,
+
+    participant_count=18,
+    matchday_count=34,
+    fixture_count=306,
+    timezone_name="Europe/Paris",
+
+    bootstrap_directory=(
+        PROJECT_ROOT
+        / "outputs"
+        / "ligue_1_2026_27_bootstrap"
+    ),
+
+    target_season_registry_path=(
+        PROJECT_ROOT
+        / "outputs"
+        / "ligue_1_2026_27_season_registry.csv"
+    ),
+
+    feeder_season_registry_path=(
+        PROJECT_ROOT
+        / "outputs"
+        / "ligue_2_2025_26_season_registry.csv"
+    ),
+
+    target_competition_manifest_path=(
+        PROJECT_ROOT
+        / "outputs"
+        / "ligue_1_2026_27_competition_manifest.csv"
+    ),
+
+    feeder_competition_manifest_path=(
+        PROJECT_ROOT
+        / "outputs"
+        / "ligue_2_2025_26_competition_manifest.csv"
+    ),
+
+    target_participants_path=(
+        PROJECT_ROOT
+        / "outputs"
+        / "ligue_1_2026_27_bootstrap"
+        / "ligue_1_2026_27_target_participants.csv"
+    ),
+
+    feeder_teams_path=(
+        PROJECT_ROOT
+        / "data"
+        / "raw"
+        / "sofascore"
+        / "ligue_2_2025_26_teams.csv"
+    ),
+
+    feeder_players_path=(
+        PROJECT_ROOT
+        / "data"
+        / "raw"
+        / "sofascore"
+        / "ligue_2_2025_26_players.csv"
+    ),
+
+    membership_candidate_path=(
+        PROJECT_ROOT
+        / "outputs"
+        / "ligue_1_2026_27_bootstrap"
+        / "ligue_1_2026_27_membership_candidate.csv"
+    ),
+
+    membership_resolved_path=(
+        PROJECT_ROOT
+        / "outputs"
+        / "ligue_1_2026_27_bootstrap"
+        / "ligue_1_2026_27_membership_resolved.csv"
+    ),
+
+    baseline_registry_path=(
+        PROJECT_ROOT
+        / "outputs"
+        / "study_101f_canonical_player_registry.csv"
+    ),
+
+    baseline_ratings_path=(
+        PROJECT_ROOT
+        / "outputs"
+        / "study_101f_player_ratings.csv"
+    ),
+
+    expanded_registry_path=(
+        PROJECT_ROOT
+        / "outputs"
+        / "ligue_1_2026_27_bootstrap"
+        / "intelligence_backfill"
+        / "expanded_player_registry.csv"
+    ),
+
+    expanded_ratings_path=(
+        PROJECT_ROOT
+        / "outputs"
+        / "ligue_1_2026_27_bootstrap"
+        / "intelligence_backfill"
+        / "expanded_player_ratings.csv"
+    ),
+
+    club_repository_path=(
+        PROJECT_ROOT
+        / "outputs"
+        / "ligue_1_2026_27_bootstrap"
+        / "ligue_1_2026_27_club_repository.csv"
+    ),
+
+    fixture_path=(
+        PROJECT_ROOT
+        / "outputs"
+        / "ligue_1_2026_27_bootstrap"
+        / "ligue_1_2026_27_fixtures.csv"
+    ),
+
+    repository_source="ligue_1_production_v1",
+
+    structural_validation_path=(
+        PROJECT_ROOT
+        / "outputs"
+        / "ligue_1_2026_27_simulation"
+        / "structural_validation.json"
+    ),
+
+    production_validation_path=(
+        PROJECT_ROOT
+        / "outputs"
+        / "ligue_1_2026_27_simulation"
+        / "production_validation.json"
+    ),
+
+    monte_carlo_validation_path=(
+        PROJECT_ROOT
+        / "outputs"
+        / "ligue_1_2026_27_simulation"
+        / "monte_carlo_validation.json"
+    ),
+
+    regression_validation_path=(
+        PROJECT_ROOT
+        / "outputs"
+        / "onboarding_validation"
+        / "regression_suite.json"
+    ),
+)
+
 DOMESTIC_LEAGUE_ONBOARDING_SPECS = {
     SERIE_A_2026_27_ONBOARDING.key:
         SERIE_A_2026_27_ONBOARDING,
+    LIGUE_1_2026_27_ONBOARDING.key:
+        LIGUE_1_2026_27_ONBOARDING,
 }
 
 ONBOARDING_STAGES = (

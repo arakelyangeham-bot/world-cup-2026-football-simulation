@@ -196,6 +196,50 @@ SERIE_A_2026_27 = DomesticLeagueSimulationConfig(
     ),
 )
 
+LIGUE_1_2026_27 = DomesticLeagueSimulationConfig(
+    key="ligue_1",
+    competition_name="Ligue 1",
+    season="2026-27",
+    participant_count=18,
+    matches_per_team=34,
+    matchday_count=34,
+    fixture_count=306,
+    top_four_count=4,
+    top_six_count=6,
+    relegation_count=3,
+    repository_source=(
+        "ligue_1_production_v1"
+    ),
+    rating_prediction_date=date(
+        2026,
+        8,
+        15,
+    ),
+    fixture_path=(
+        PROJECT_ROOT
+        / "outputs"
+        / "ligue_1_2026_27_bootstrap"
+        / "ligue_1_2026_27_fixtures.csv"
+    ),
+    repository_path=(
+        PROJECT_ROOT
+        / "outputs"
+        / "ligue_1_2026_27_bootstrap"
+        / "ligue_1_2026_27_club_repository.csv"
+    ),
+    goal_model_path=(
+        PROJECT_ROOT
+        / "outputs"
+        / "study_069_production_club_goal_model_v1"
+        / "integrated_club_goal_model_v1.json"
+    ),
+    output_directory=(
+        PROJECT_ROOT
+        / "outputs"
+        / "ligue_1_2026_27_simulation"
+    ),
+)
+
 DOMESTIC_LEAGUE_CONFIGS = {
     PREMIER_LEAGUE_2026_27.key:
         PREMIER_LEAGUE_2026_27,
@@ -205,4 +249,6 @@ DOMESTIC_LEAGUE_CONFIGS = {
         BUNDESLIGA_2026_27,
     SERIE_A_2026_27.key:
         SERIE_A_2026_27,
+    LIGUE_1_2026_27.key:
+        LIGUE_1_2026_27,
 }

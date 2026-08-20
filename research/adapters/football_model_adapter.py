@@ -48,9 +48,9 @@ DOMESTIC_PRODUCTION_REPOSITORY_SOURCES = frozenset(
         "la_liga_production_v1",
         "bundesliga_production_v1",
         "serie_a_production_v1",
+        "ligue_1_production_v1",
     }
 )
-
 
 LEGACY_CLUB_REPOSITORY_SOURCES = {
     "premier_league_validation",

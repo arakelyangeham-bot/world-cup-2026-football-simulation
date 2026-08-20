@@ -56,6 +56,10 @@ LEAGUES = {
         "display_name": "Ligue 1",
         "unique_tournament_id": 34,
     },
+    "ligue_2":{
+        "display_name": "Ligue 2",
+        "unique_tournament_id": 182,
+    },
     "liga_portugal": {
         "display_name": "Liga Portugal",
         "unique_tournament_id": 238,
