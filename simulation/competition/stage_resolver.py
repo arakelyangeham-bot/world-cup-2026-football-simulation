@@ -38,6 +38,10 @@ class StageResolver:
         self.register(StageType.KNOCKOUT, knockout_engine)
         self.register(StageType.PLAYOFF, knockout_engine)
         self.register(StageType.FINAL, knockout_engine)
+        self.register(
+            StageType.TWO_LEG_KNOCKOUT,
+            knockout_engine,
+        )
         
     def register(self, stage_type: StageType, engine: StageEngine) -> None:
         self.engines[stage_type] = engine
