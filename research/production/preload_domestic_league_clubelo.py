@@ -35,6 +35,7 @@ from research.production.domestic_clubelo_identity import (
 
 BUNDESLIGA_2026_27_CLUBELO_NAME_OVERRIDES = {
     **BUNDESLIGA_CLUBELO_NAME_OVERRIDES,
+    "FC Bayern München": "Bayern",
     "1. FC Köln": "Koeln",
     "FC Schalke 04": "Schalke",
     "Hamburger SV": "Hamburg",
@@ -218,18 +219,28 @@ def main() -> None:
             if candidate_result.status != "FAILED":
                 break
 
+            if candidate_result.failure_category in {
+                "TIMEOUT",
+                "HTTP_5XX",
+                "NETWORK",
+            }:
+                break
+
         results.append(result)
 
         if result.status == "FAILED":
             print(
-                "  FAILED:",
+                "  FAILED"
+                f" [{result.failure_category}]"
+                f" after {result.elapsed_seconds:.2f}s:",
                 result.error,
             )
         else:
             print(
                 f"  {result.status}: "
                 f"{result.resolved_club} "
-                f"({result.row_count} rows)"
+                f"({result.row_count} rows) "
+                f"in {result.elapsed_seconds:.2f}s"
             )
 
     if arguments.dry_run:

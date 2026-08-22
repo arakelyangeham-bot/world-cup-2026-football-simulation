@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from research.rating_priors.clubelo_repository import (
+    ClubEloDownloadError,
     ClubEloRepository,
 )
 
@@ -24,6 +25,8 @@ class PreloadResult:
     resolved_club: str | None
     row_count: int | None
     error: str | None
+    failure_category: str | None = None
+    elapsed_seconds: float | None = None
 
 
 def preload_one_history(
@@ -41,6 +44,8 @@ def preload_one_history(
     downstream simulation code can resolve ratings using its canonical
     domestic-league club identity.
     """
+
+    started_at = time.perf_counter()
 
     expected_path = repository.cache_path(
         production_club
@@ -108,6 +113,11 @@ def preload_one_history(
                 else "DOWNLOADED"
             )
 
+            failure_category=None,
+            elapsed_seconds=(
+                time.perf_counter() - started_at
+            ),
+
             return PreloadResult(
                 production_club=production_club,
                 clubelo_lookup_name=clubelo_lookup_name,
@@ -116,13 +126,24 @@ def preload_one_history(
                 resolved_club=unique_resolved_clubs[0],
                 row_count=len(dataframe),
                 error=None,
+                failure_category=None,
+                elapsed_seconds=(
+                    time.perf_counter() - started_at
+                ),
             )
 
-        except Exception as error:
-            if attempt < MAX_ATTEMPTS:
-                time.sleep(
-                    RETRY_DELAY_SECONDS
-                )
+        except ClubEloDownloadError as error:
+            retryable_categories = {
+                "TIMEOUT",
+                "HTTP_5XX",
+                "NETWORK",
+            }
+
+            if (
+                error.category in retryable_categories
+                and attempt < MAX_ATTEMPTS
+            ):
+                time.sleep(RETRY_DELAY_SECONDS)
                 continue
 
             return PreloadResult(
@@ -139,6 +160,32 @@ def preload_one_history(
                 error=(
                     f"{type(error).__name__}: "
                     f"{error}"
+                ),
+                failure_category=error.category,
+                elapsed_seconds=(
+                    time.perf_counter() - started_at
+                ),
+            )
+
+        except Exception as error:
+            return PreloadResult(
+                production_club=production_club,
+                clubelo_lookup_name=clubelo_lookup_name,
+                status="FAILED",
+                cache_path=(
+                    expected_path
+                    if expected_path.exists()
+                    else None
+                ),
+                resolved_club=None,
+                row_count=None,
+                error=(
+                    f"{type(error).__name__}: "
+                    f"{error}"
+                ),
+                failure_category="VALIDATION",
+                elapsed_seconds=(
+                    time.perf_counter() - started_at
                 ),
             )
 

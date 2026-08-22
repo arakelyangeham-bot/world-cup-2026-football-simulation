@@ -8,10 +8,17 @@ from pathlib import Path
 from typing import Iterable
 from urllib.parse import quote
 
+from io import BytesIO
+from urllib.error import HTTPError, URLError
+from urllib.request import urlopen
+import socket
+
 import pandas as pd
 
 
 CLUBELO_BASE_URL = "http://api.clubelo.com"
+
+
 
 
 @dataclass(frozen=True)
@@ -61,6 +68,24 @@ class ClubEloRatingResult:
     source: str
     temporal_validity_pass: bool
 
+class ClubEloDownloadError(RuntimeError):
+    """
+    Classified failure while acquiring a ClubElo history.
+    """
+
+    def __init__(
+        self,
+        *,
+        club_name: str,
+        url: str,
+        category: str,
+        message: str,
+    ) -> None:
+        super().__init__(message)
+
+        self.club_name = club_name
+        self.url = url
+        self.category = category
 
 class ClubEloRepository:
     """
@@ -80,6 +105,7 @@ class ClubEloRepository:
     def __init__(
         self,
         cache_directory: Path,
+        request_timeout_seconds: float = 15.0,
     ) -> None:
         self.cache_directory = Path(
             cache_directory
@@ -88,6 +114,15 @@ class ClubEloRepository:
         self.cache_directory.mkdir(
             parents=True,
             exist_ok=True,
+        )
+
+        if request_timeout_seconds <= 0:
+            raise ValueError(
+                "request_timeout_seconds must be positive."
+            )
+
+        self.request_timeout_seconds = (
+            float(request_timeout_seconds)
         )
 
         self._memory_cache: dict[
@@ -208,8 +243,71 @@ class ClubEloRepository:
             club_name
         )
 
+        try:
+            with urlopen(
+                url,
+                timeout=self.request_timeout_seconds,
+            ) as response:
+                payload = response.read()
+
+        except HTTPError as exc:
+            if 500 <= exc.code <= 599:
+                category = "HTTP_5XX"
+            else:
+                category = "HTTP_ERROR"
+
+            raise ClubEloDownloadError(
+                club_name=club_name,
+                url=url,
+                category=category,
+                message=(
+                    f"ClubElo request failed for "
+                    f"{club_name!r}: HTTP {exc.code} "
+                    f"{exc.reason}"
+                ),
+            ) from exc
+
+        except (
+            TimeoutError,
+            socket.timeout,
+        ) as exc:
+            raise ClubEloDownloadError(
+                club_name=club_name,
+                url=url,
+                category="TIMEOUT",
+                message=(
+                    "ClubElo request timed out for "
+                    f"{club_name!r} after "
+                    f"{self.request_timeout_seconds:.1f} seconds."
+                ),
+            ) from exc
+
+        except URLError as exc:
+            reason = exc.reason
+
+            if isinstance(
+                reason,
+                (
+                    TimeoutError,
+                    socket.timeout,
+                ),
+            ):
+                category = "TIMEOUT"
+            else:
+                category = "NETWORK"
+
+            raise ClubEloDownloadError(
+                club_name=club_name,
+                url=url,
+                category=category,
+                message=(
+                    "ClubElo network request failed for "
+                    f"{club_name!r}: {reason}"
+                ),
+            ) from exc
+
         dataframe = pd.read_csv(
-            url,
+            BytesIO(payload),
             low_memory=False,
         )
 

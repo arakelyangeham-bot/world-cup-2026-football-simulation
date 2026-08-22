@@ -288,7 +288,11 @@ class FootballModelAdapter:
             LiveMatchObservationBuilder(
                 club_repository=production_repository,
                 clubelo_repository=clubelo_repository,
-                clubelo_name_overrides=DEFAULT_CLUBELO_NAME_OVERRIDES,
+                clubelo_name_overrides=(
+                    self._resolve_clubelo_name_overrides(
+                        condition
+                    )
+                ),
                 rating_prediction_date=(
                     date.fromisoformat(
                         condition.parameters["rating_prediction_date"]
@@ -348,3 +352,36 @@ class FootballModelAdapter:
                 **condition.parameters,
             },
         )
+
+    def _resolve_clubelo_name_overrides(
+        self,
+        condition,
+    ) -> dict[str, str]:
+        overrides = dict(
+            DEFAULT_CLUBELO_NAME_OVERRIDES
+        )
+
+        custom_overrides = (
+            condition.parameters.get(
+                "clubelo_name_overrides",
+                {},
+            )
+        )
+
+        if custom_overrides is None:
+            return overrides
+
+        if not isinstance(custom_overrides, dict):
+            raise TypeError(
+                "clubelo_name_overrides must be a mapping."
+            )
+
+        overrides.update(
+            {
+                str(club): str(lookup)
+                for club, lookup
+                in custom_overrides.items()
+            }
+        )
+
+        return overrides

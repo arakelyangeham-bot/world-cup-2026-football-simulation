@@ -48,3 +48,41 @@ def test_structural_simulator_is_reproducible_from_seed():
     )
 
     assert first == second
+
+def test_structural_simulator_can_use_injected_match_simulator():
+    calls: list[tuple[str, str, str]] = []
+
+    def deterministic_match_simulator(
+        home_team: str,
+        away_team: str,
+        stage: str,
+    ) -> tuple[int, int]:
+        calls.append(
+            (
+                home_team,
+                away_team,
+                stage,
+            )
+        )
+
+        return (2, 0)
+
+    result = simulate_champions_league_structural(
+        teams=_teams(),
+        seed=202627,
+        match_simulator=deterministic_match_simulator,
+    )
+
+    assert result.champion in _teams()
+
+    assert len(calls) > 144
+
+    assert any(
+        stage == "League Phase"
+        for _, _, stage in calls
+    )
+
+    assert any(
+        stage == "Final"
+        for _, _, stage in calls
+    )

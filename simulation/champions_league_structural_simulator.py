@@ -28,6 +28,14 @@ from simulation.competition.champions_league_bracket import (
 )
 from simulation.competition.tie import Tie
 
+from collections.abc import Callable
+
+
+MatchSimulator = Callable[
+    [str, str, str],
+    tuple[int, int],
+]
+
 @dataclass(frozen=True)
 class ChampionsLeagueStructuralSimulationResult:
     champion: str
@@ -68,6 +76,7 @@ def _simulate_match(
 def simulate_champions_league_structural(
     teams: list[str],
     seed: int = 202627,
+    match_simulator: MatchSimulator | None = None,
 ) -> ChampionsLeagueStructuralSimulationResult:
     if len(teams) != 36:
         raise ValueError(
@@ -83,6 +92,42 @@ def simulate_champions_league_structural(
 
     rng = Random(seed)
 
+    def simulate_match(
+        *,
+        home_team: str,
+        away_team: str,
+        stage: str,
+        allow_draw: bool,
+    ) -> MatchResult:
+        if match_simulator is None:
+            return _simulate_match(
+                team1=home_team,
+                team2=away_team,
+                rng=rng,
+                stage=stage,
+                allow_draw=allow_draw,
+            )
+
+        home_goals, away_goals = match_simulator(
+            home_team,
+            away_team,
+            stage,
+        )
+
+        if not allow_draw and home_goals == away_goals:
+            raise ValueError(
+                "Injected match simulator returned a draw "
+                "for a stage requiring a winner."
+            )
+
+        return MatchResult(
+            team1=home_team,
+            team2=away_team,
+            goals_team1=home_goals,
+            goals_team2=away_goals,
+            stage=stage,
+        )
+
     fixtures = (
         build_synthetic_champions_league_league_phase_schedule(
             teams
@@ -93,10 +138,9 @@ def simulate_champions_league_structural(
 
     for fixture in fixtures:
         league_phase_results.append(
-            _simulate_match(
-                team1=fixture.home_team,
-                team2=fixture.away_team,
-                rng=rng,
+            simulate_match(
+                home_team=fixture.home_team,
+                away_team=fixture.away_team,
                 stage="League Phase",
                 allow_draw=True,
             )
@@ -151,18 +195,16 @@ def simulate_champions_league_structural(
     playoff_ties: list[Tie] = []
 
     for pairing in playoff_pairings:
-        first_leg = _simulate_match(
-            team1=pairing.first_leg_home,
-            team2=pairing.second_leg_home,
-            rng=rng,
+        first_leg = simulate_match(
+            home_team=pairing.first_leg_home,
+            away_team=pairing.second_leg_home,
             stage="Knockout Phase Playoff",
             allow_draw=True,
         )
 
-        second_leg = _simulate_match(
-            team1=pairing.second_leg_home,
-            team2=pairing.first_leg_home,
-            rng=rng,
+        second_leg = simulate_match(
+            home_team=pairing.second_leg_home,
+            away_team=pairing.first_leg_home,
             stage="Knockout Phase Playoff",
             allow_draw=True,
         )
@@ -259,18 +301,16 @@ def simulate_champions_league_structural(
     round_of_16_ties: list[Tie] = []
 
     for pairing in round_of_16_pairings:
-        first_leg = _simulate_match(
-            team1=pairing.first_leg_home,
-            team2=pairing.second_leg_home,
-            rng=rng,
+        first_leg = simulate_match(
+            home_team=pairing.first_leg_home,
+            away_team=pairing.second_leg_home,
             stage="Round of 16",
             allow_draw=True,
         )
 
-        second_leg = _simulate_match(
-            team1=pairing.second_leg_home,
-            team2=pairing.first_leg_home,
-            rng=rng,
+        second_leg = simulate_match(
+            home_team=pairing.second_leg_home,
+            away_team=pairing.first_leg_home,
             stage="Round of 16",
             allow_draw=True,
         )
@@ -389,18 +429,16 @@ def simulate_champions_league_structural(
     quarterfinal_ties: list[Tie] = []
 
     for pairing in quarterfinal_pairings:
-        first_leg = _simulate_match(
-            team1=pairing.first_leg_home,
-            team2=pairing.second_leg_home,
-            rng=rng,
+        first_leg = simulate_match(
+            home_team=pairing.first_leg_home,
+            away_team=pairing.second_leg_home,
             stage="Quarterfinal",
             allow_draw=True,
         )
 
-        second_leg = _simulate_match(
-            team1=pairing.second_leg_home,
-            team2=pairing.first_leg_home,
-            rng=rng,
+        second_leg = simulate_match(
+            home_team=pairing.second_leg_home,
+            away_team=pairing.first_leg_home,
             stage="Quarterfinal",
             allow_draw=True,
         )
@@ -523,18 +561,16 @@ def simulate_champions_league_structural(
     semifinal_ties: list[Tie] = []
 
     for semifinal_id, pairing in semifinal_pairings.items():
-        first_leg = _simulate_match(
-            team1=pairing.first_leg_home,
-            team2=pairing.second_leg_home,
-            rng=rng,
+        first_leg = simulate_match(
+            home_team=pairing.first_leg_home,
+            away_team=pairing.second_leg_home,
             stage="Semifinal",
             allow_draw=True,
         )
 
-        second_leg = _simulate_match(
-            team1=pairing.second_leg_home,
-            team2=pairing.first_leg_home,
-            rng=rng,
+        second_leg = simulate_match(
+            home_team=pairing.second_leg_home,
+            away_team=pairing.first_leg_home,
             stage="Semifinal",
             allow_draw=True,
         )
@@ -633,10 +669,9 @@ def simulate_champions_league_structural(
         semifinal_winner_occupants
     )
 
-    final_match = _simulate_match(
-        team1=final.team1.team,
-        team2=final.team2.team,
-        rng=rng,
+    final_match = simulate_match(
+        home_team=final.team1.team,
+        away_team=final.team2.team,
         stage="Final",
         allow_draw=False,
     )
